@@ -10,7 +10,7 @@ $(document).bind("mobileinit", function(){
 			$("a.showMenu").click(function(){
 				//alert(menuStatus);
 				if(menuStatus != true){	
-				document.getElementById("menu").style.visibility = 'visible';		
+				document.getElementById("menu").style.visibility = 'visible';	
 				$(".current").animate({
 					marginLeft: '165px'
 				  }, 300, function(){
@@ -28,28 +28,29 @@ $(document).bind("mobileinit", function(){
 				  }
 			});
 			
-			
-			$('#menu').live("swipeleft", function(){
-				if (menuStatus){	
-				$(".current").animate({
-					marginLeft: "0px",
-				  }, 300, function(){
-					  menuStatus = false;
-					  document.getElementById("menu").style.visibility = 'hidden';
-					});
+
+			$('#jqt').swipe(function(evt, data) {
+                    if(data.deltaX >= 40){
+                    	if (!menuStatus){
+							document.getElementById("menu").style.visibility = 'visible';	
+							$(".current").animate({
+							marginLeft: "165px",
+				  			}, 300, function(){
+					 		 menuStatus = true;
+							});
 				  }
-			});
-			
-			$('#jqt').live("swiperight", function(){
-				if (!menuStatus){	
-				$(".current").animate({
-					marginLeft: "165px",
-				  }, 300, function(){
-					  document.getElementById("menu").style.visibility = 'hidden';
-					  menuStatus = true;
-					});
+                    }else if(data.deltaX <= -5){
+                    	if (menuStatus){
+							$(".current").animate({
+								marginLeft: "0px",
+				  			}, 300, function(){
+					  			menuStatus = false;
+					  			document.getElementById("menu").style.visibility = 'hidden';
+							});
 				  }
-			});
+                    }
+                    
+                });
 			
 			
 			// Menu behaviour
@@ -57,6 +58,14 @@ $(document).bind("mobileinit", function(){
 
 				$('.currentSeccion').removeClass('currentSeccion');
 				$(this).parent().addClass('currentSeccion');
+
+				//alert($(".p").length);
+				$(".current").css("margin-left","0");
+				menuStatus = false;
+				document.getElementById("menu").style.visibility = 'hidden';
+			});
+
+			$("#jqt li a").click(function(){
 
 				//alert($(".p").length);
 				$(".current").css("margin-left","0");
