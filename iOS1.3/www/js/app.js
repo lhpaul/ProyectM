@@ -1,3 +1,5 @@
+var host = "http://www.moonsik.com/iphone2/";
+
 $(document).bind("mobileinit", function(){
 	$.mobile.pushStateEnabled = true;
 	$.mobile.allowCrossDomainPages = true;
@@ -148,7 +150,7 @@ $(document).bind("mobileinit", function(){
   				if(search == 0)
   				return false;
   				$.mobile.showPageLoadingMsg();	
-  					var dir = "http://www.moonsik.com/iphone2/ayax/busqueda2.php?q="+search;
+  					var dir = host+"ayax/busqueda2.php?q="+search;
   					//alert(dir);
 					var request = $.ajax({
       					type: "GET",
@@ -174,7 +176,7 @@ $(document).bind("mobileinit", function(){
   				if(search == 0)
   				return false;
   				$.mobile.showPageLoadingMsg();	
-  					var dir = "http://www.moonsik.com/iphone2/ayax/busqueda2.php?q="+search;
+  					var dir = host+"ayax/busqueda2.php?q="+search;
   					//alert(dir);
 					var request = $.ajax({
       					type: "GET",
@@ -196,7 +198,7 @@ $(document).bind("mobileinit", function(){
 			});
 
 
-
+			
 
 });
 
