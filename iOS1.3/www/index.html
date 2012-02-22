@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+	<meta charset="utf-8">
+
+
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+    <script type="text/javascript">
+
+
+	// If you want to prevent dragging, uncomment this section
+	/*
+	function preventBehavior(e) 
+	{ 
+      e.preventDefault(); 
+    };
+	document.addEventListener("touchmove", preventBehavior, false);
+	*/
+	
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	/*
+	function handleOpenURL(url)
+	{
+		// TODO: do something with the url passed in.
+	}
+	*/
+	
+	function onBodyLoad()
+	{		
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	
+	/* When this function is called, PhoneGap has been initialized and is ready to roll */
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	function onDeviceReady()
+	{
+		// do your thing!
+		//navigator.notification.alert("PhoneGap is working")
+	}
+
+    </script>
+
+    <link rel="stylesheet" href="jquery.mobile-1.0.1.min.css" />
+    <link rel="stylesheet" href="css/moonsik1.css" />
+	<script src="jquery.js"></script>
+	<!-- libreria jplayer -->
+	<script type="text/javascript" src="jplayer/js/jquery.jplayer.min.js"></script>
+	<script type="text/javascript" src="jplayer/js/jplayer.playlist.min.js"></script>
+	
+
+	<script type="text/javascript" src="js/app.js"></script>
+	<script src="jquery.mobile-1.0.1.min.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+  </head>
+  <body onload="onBodyLoad()">
+  <div id="menu">
+				<div id="memberDetails">
+					<h3><span>Welcome,</span><br /> <em>Luis Hernan</em></h3>
+				</div>
+				<ul>
+					<li class="currentSeccion"><a href="#ownLists" class="contentLink">My Lists<span class="icon"></span></a></li>
+					<li><a href="#searchMusic" class="contentLink">Search<span class="icon"></span></a></li>
+					<li><a href="#friends" class="contentLink">Friends<span class="icon"></span></a></li>
+				</ul>
+	</div>
+	
+<!-- Start of first page: #one -->
+<div data-role="page" id="ownLists">
+
+	<div data-role="header" data-id="lists">
+		<h1>My Lists</h1>
+		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
+		<a href="#reproductor" class="menuBtn ui-btn-right">Now Playing</a>
+		<div data-role="navbar" class = "tabs">
+			<ul>
+				<li><a href="#" tab ="ownLists" class="ui-btn-active ui-state-persist">My Own</a></li>
+				<li><a href="#favoriteLists" data-transition="fade" tab ="favoriteLists">Favorites</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	<ul id="owns" data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+	</ul>
+	</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+<!-- Start of first page: #one -->
+<div data-role="page" id="favoriteLists">
+
+	<div data-role="header" data-id="lists">
+		<h1>My Lists</h1>
+		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
+		<div data-role="navbar" class = "tabs">
+			<ul>
+				<li><a href="#ownLists" tab ="ownLists" data-transition="fade">My Own</a></li>
+				<li><a href="#" tab ="favoriteLists" class="ui-btn-active ui-state-persist">Favorites</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	<ul id="favorites" data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+	</ul>
+	</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+
+<div data-role="page" id="searchMusic">
+
+	<div data-role="header" data-id="searchHead">
+		<h1>Search by</h1>
+		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
+		<div data-role="navbar" class = "tabs">
+			<ul>
+				<li><a href="#" data-transition="fade" tab ="music" class="ui-btn-active ui-state-persist">Music</a></li>
+				<li><a href="#searchLists" data-transition="fade" tab ="lists">Lists</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	<form id = "musicForm" method="get">
+	<label for="search_music" class="ui-hidden-accessible">Search...</label>
+	<input type="search" name="search_music" id="searc-basic" value="" placeholder="Search..."/>
+	</form>
+	<p></p>
+	<ul id="music" data-role="listview"></ul>
+	</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+<div data-role="page" id="searchLists">
+
+	<div data-role="header" data-id="searchHead">
+		<h1>Search by</h1>
+		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
+		<div data-role="navbar" class = "tabs">
+			<ul>
+				<li><a href="#searchMusic" data-transition="fade" tab ="music">Music</a></li>
+				<li><a href="#" data-transition="fade" tab ="lists" class="ui-btn-active ui-state-persist">Lists</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	<form id = "searchForm" method="get">
+	<label for="search_list" class="ui-hidden-accessible">Search...</label>
+	<input type="search" name="search_list" id="searc-basic" value="" placeholder="Search..."/>
+	</form>
+	<p></p>
+	<ul id = "lists" data-role="listview"></ul>
+	</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+<!-- Start of first page: #one -->
+<div data-role="page" id="friends">
+
+	<div data-role="header" data-id="friendsHead">
+		<h1>Friends</h1>
+		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	<ul data-role="listview" data-filter="true" data-filter-placeholder="Search people..." data-filter-theme="b">
+				<li><a href="index.html">
+				<img src="images/album-bb.jpg" />
+				<h3>Broken Bells</h3>
+				<p>Broken Bells</p>
+			</a></li>
+			<li><a href="index.html">
+				<img src="images/album-hc.jpg" />
+				<h3>Warning</h3>
+				<p>Hot Chip</p>
+			</a></li>
+			<li><a href="index.html">
+				<img src="images/album-p.jpg" />
+				<h3>Wolfgang Amadeus Phoenix</h3>
+				<p>Phoenix</p>
+			</a></li>
+			<li><a href="index.html">
+				<img src="images/album-ok.jpg" />
+				<h3>Of The Blue Colour Of The Sky</h3>
+				<p>Ok Go</p>
+			</a></li>
+			<li><a href="index.html">
+				<img src="images/album-ws.jpg" />
+				<h3>Elephant</h3>
+				<p>The White Stripes</p>
+			</a></li>
+			<li><a href="index.html">
+				<img src="images/album-rh.jpg" />
+				<h3>Kid A</h3>
+				<p>Radiohead</p>
+			</a></li>
+			<li><a href="index.html">
+				<img src="images/album-xx.jpg" />
+				<h3>XX</h3>
+				<p>XX</p>
+			</a></li>
+			<li><a href="index.html">
+				<img src="images/album-mg.jpg" />
+				<h3>Congratulations</h3>
+				<p>MGMT</p>
+			</a></li>
+			
+			<li><a href="index.html">
+				<img src="images/album-ag.jpg" />
+				<h3>Ashes Grammar</h3>
+				<p>A Sunny Day in Glasgow</p>
+			</a></li>
+			
+			<li><a href="index.html">
+				<img src="images/album-k.jpg" />
+				<h3>Hot Fuss</h3>
+				<p>Killers</p>
+			</a></li>
+			<li><a href="index.html">	
+				<img src="images/album-af.jpg" />
+				<h3>The Suburbs</h3>
+				<p>Arcade Fire</p>
+			</a></li>
+			</ul>
+	</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+<!--pagina reproductor -->
+<div data-role="page" id="reproductor">
+
+	<div data-role="header" data-id="searchHead">
+		<h1>Player</h1>
+		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
+	
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	
+	<div id="jp_container_N" class="jp-video jp-video-270p">
+			<div class="jp-type-playlist">
+				<div id="jquery_jplayer_N" class="jp-jplayer"></div>
+				<div class="jp-gui">
+					<div class="jp-video-play">
+						<a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+					</div>
+					<div class="jp-interface">
+						<div class="jp-progress">
+							<div class="jp-seek-bar">
+								<div class="jp-play-bar"></div>
+							</div>
+						</div>
+						<div class="jp-current-time"></div>
+						<div class="jp-duration"></div>
+						<div class="jp-controls-holder">
+							<ul class="jp-controls">
+								<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
+								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+								<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+								<li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
+								<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+								<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+								<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+								<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+							</ul>
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+							<ul class="jp-toggles">
+								<li><a href="javascript:;" class="jp-full-screen" tabindex="1" title="full screen">full screen</a></li>
+								<li><a href="javascript:;" class="jp-restore-screen" tabindex="1" title="restore screen">restore screen</a></li>
+								<li><a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a></li>
+								<li><a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a></li>
+								<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+								<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+							</ul>
+						</div>
+						<div class="jp-title">
+							<ul>
+								<li></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="jp-playlist">
+					<ul>
+						<!-- The method Playlist.displayPlaylist() uses this unordered list -->
+						<li></li>
+					</ul>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div>
+		
+		
+		<a href="#" onclick="addToPlaylist(6432);"> agregar</a>
+	
+	</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+</body>
+</html>
