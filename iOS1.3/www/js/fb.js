@@ -1,55 +1,33 @@
-<html>
-	<head>
-  </head>
-	<body>
-		<button onclick="login()">Login</button>
-		<button onclick="me()">Me</button>
-		<button onclick="getSession()">Get session</button>
-		<button onclick="getLoginStatus()">Get login</button>
-		<button onclick="logout()">Logout</button>
-
-        <div id="data">loading ...</div>
-
-        <!-- phonegap -->
-		<script src="phonegap-1.4.1.js"></script>
-	    <!-- phonegap facebook plugin -->
-		<script src="pg-plugin-fb-connect.js"></script>
-	    <!-- facebook js sdk -->
-		<script src="facebook_js_sdk.js"></script>
-        
-		<script>
-
-            if (typeof PhoneGap == 'undefined') alert('PhoneGap variable does not exist. Check that you have included phonegap.js correctly');
+if (typeof PhoneGap == 'undefined') alert('PhoneGap variable does not exist. Check that you have included phonegap.js correctly');
             if (typeof PG == 'undefined') alert('PG variable does not exist. Check that you have included pg-plugin-fb-connect.js correctly');
             if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
-            FB.Event.subscribe('auth.login', function(response) {
-                alert('auth.login event');
+FB.Event.subscribe('auth.login', function(response) {
+                //alert('auth.login event');
             });
             
             FB.Event.subscribe('auth.logout', function(response) {
-                alert('auth.logout event');
+                //alert('auth.logout event');
             });
             
             FB.Event.subscribe('auth.sessionChange', function(response) {
-                alert('auth.sessionChange event');
+                //alert('auth.sessionChange event');
             });
             
             FB.Event.subscribe('auth.statusChange', function(response) {
-                alert('auth.statusChange event');
+                //alert('auth.statusChange event');
             });
             
             function getSession() {
                 alert("session: " + JSON.stringify(FB.getSession()));
             }
             
-            function getLoginStatus() {
+            function isLogged() {
                 FB.getLoginStatus(function(response) {
                     if (response.status == 'connected') {
-                        alert('logged in');
-                    } else {
-                        alert('not logged in');
+                        return true
                     }
+                    return false;
                 });
             }
             
@@ -78,6 +56,7 @@
                 FB.login(
                     function(response) {
                         if (response.session) {
+                            changeMenu();
                             alert('logged in');
                         } else {
                             alert('not logged in');
@@ -86,7 +65,20 @@
                     { perms: "email" }
                 );
             }
-            
+
+            function changeMenu()
+            {
+                var html = '<h3><span>Welcome,</span><br /> <em>Luis Hernan</em></h3>';
+                var men = $( "#menu" ).find("#memberDetails");
+                men.empty();
+                men.append(html);
+                html = '<li><a href="#ownLists" class="contentLink">My Lists<span class="icon"></span></a></li><li class="currentSeccion"><a href="#searchMusic" class="contentLink">Search<span class="icon"></span></a></li><li><a href="footer-persist-a.html" class="contentLink">Friends<span class="icon"></span></a></li>';
+                men = $( "#menu" ).find( "#menuList");
+                men.empty();
+                men.append(html);
+                return true;
+            }
+
             document.addEventListener('deviceready', function() {
                 try {
                     alert('Device is ready! Make sure you set your app_id below this alert.');
@@ -95,7 +87,3 @@
                     alert(e);
                 }
             }, false);
-        </script>
-        <div id="log"></div>
-	</body>
-</html>

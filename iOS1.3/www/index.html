@@ -38,6 +38,7 @@
 	function onBodyLoad()
 	{		
 		document.addEventListener("deviceready", onDeviceReady, false);
+
 	}
 	
 	/* When this function is called, PhoneGap has been initialized and is ready to roll */
@@ -46,8 +47,7 @@
 	for more details -jm */
 	function onDeviceReady()
 	{
-		// do your thing!
-		//navigator.notification.alert("PhoneGap is working")
+		
 	}
 
     </script>
@@ -58,23 +58,86 @@
 	<!-- libreria jplayer -->
 	<script type="text/javascript" src="jplayer/js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="jplayer/js/jplayer.playlist.min.js"></script>
-	
+
+    <!-- phonegap facebook plugin -->
+    <script src="pg-plugin-fb-connect.js"></script>
+    <!-- facebook js sdk -->
+    <script src="facebook_js_sdk.js"></script>
 
 	<script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/fb.js"></script>
 	<script src="jquery.mobile-1.0.1.min.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
   </head>
   <body onload="onBodyLoad()">
   <div id="menu">
 				<div id="memberDetails">
-					<h3><span>Welcome,</span><br /> <em>Luis Hernan</em></h3>
+					<h3><span>Guest</span></h3>
 				</div>
-				<ul>
-					<li class="currentSeccion"><a href="#ownLists" class="contentLink">My Lists<span class="icon"></span></a></li>
-					<li><a href="#searchMusic" class="contentLink">Search<span class="icon"></span></a></li>
-					<li><a href="#friends" class="contentLink">Friends<span class="icon"></span></a></li>
+				<ul id="menuList">
+					<li class="currentSeccion"><a href="#" class="contentLink" onclick="changeMenu()">Login<span class="icon"></span></a></li>
 				</ul>
 	</div>
+
+<div data-role="page" id="searchMusic">
+
+    <div data-role="header" data-id="searchHead">
+        <h1>Search by</h1>
+        <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <div data-role="navbar" class = "tabs">
+            <ul>
+                <li><a href="#" data-transition="fade" tab ="music" class="ui-btn-active ui-state-persist">Music</a></li>
+                <li><a href="#searchLists" data-transition="fade" tab ="lists">Lists</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+    <div data-role="content" >  
+    <div class="content-primary">
+    <form id = "musicForm" method="get">
+    <label for="search_music" class="ui-hidden-accessible">Search...</label>
+    <input type="search" name="search_music" id="searc-basic" value="" placeholder="Search..."/>
+    </form>
+    <p></p>
+    <ul id="music" data-role="listview"></ul>
+    </div>
+    </div><!-- /content -->
+    
+    <div data-role="footer" data-theme="d">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page one -->
+
+<div data-role="page" id="searchLists">
+
+    <div data-role="header" data-id="searchHead">
+        <h1>Search by</h1>
+        <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <div data-role="navbar" class = "tabs">
+            <ul>
+                <li><a href="#searchMusic" data-transition="fade" tab ="music">Music</a></li>
+                <li><a href="#" data-transition="fade" tab ="lists" class="ui-btn-active ui-state-persist">Lists</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+    <div data-role="content" >  
+    <div class="content-primary">
+    <form id = "searchForm" method="get">
+    <label for="search_list" class="ui-hidden-accessible">Search...</label>
+    <input type="search" name="search_list" id="searc-basic" value="" placeholder="Search..."/>
+    </form>
+    <p></p>
+    <ul id = "lists" data-role="listview"></ul>
+    </div>
+    </div><!-- /content -->
+    
+    <div data-role="footer" data-theme="d">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page one -->
+
+
 	
 <!-- Start of first page: #one -->
 <div data-role="page" id="ownLists">
@@ -130,63 +193,6 @@
 </div><!-- /page one -->
 
 
-<div data-role="page" id="searchMusic">
-
-	<div data-role="header" data-id="searchHead">
-		<h1>Search by</h1>
-		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
-		<div data-role="navbar" class = "tabs">
-			<ul>
-				<li><a href="#" data-transition="fade" tab ="music" class="ui-btn-active ui-state-persist">Music</a></li>
-				<li><a href="#searchLists" data-transition="fade" tab ="lists">Lists</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /header -->
-
-	<div data-role="content" >	
-	<div class="content-primary">
-	<form id = "musicForm" method="get">
-	<label for="search_music" class="ui-hidden-accessible">Search...</label>
-	<input type="search" name="search_music" id="searc-basic" value="" placeholder="Search..."/>
-	</form>
-	<p></p>
-	<ul id="music" data-role="listview"></ul>
-	</div>
-	</div><!-- /content -->
-	
-	<div data-role="footer" data-theme="d">
-		<h4>Page Footer</h4>
-	</div><!-- /footer -->
-</div><!-- /page one -->
-
-<div data-role="page" id="searchLists">
-
-	<div data-role="header" data-id="searchHead">
-		<h1>Search by</h1>
-		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
-		<div data-role="navbar" class = "tabs">
-			<ul>
-				<li><a href="#searchMusic" data-transition="fade" tab ="music">Music</a></li>
-				<li><a href="#" data-transition="fade" tab ="lists" class="ui-btn-active ui-state-persist">Lists</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /header -->
-
-	<div data-role="content" >	
-	<div class="content-primary">
-	<form id = "searchForm" method="get">
-	<label for="search_list" class="ui-hidden-accessible">Search...</label>
-	<input type="search" name="search_list" id="searc-basic" value="" placeholder="Search..."/>
-	</form>
-	<p></p>
-	<ul id = "lists" data-role="listview"></ul>
-	</div>
-	</div><!-- /content -->
-	
-	<div data-role="footer" data-theme="d">
-		<h4>Page Footer</h4>
-	</div><!-- /footer -->
-</div><!-- /page one -->
 
 <!-- Start of first page: #one -->
 <div data-role="page" id="friends">

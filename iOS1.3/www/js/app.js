@@ -5,13 +5,15 @@ $(document).bind("mobileinit", function(){
 	$.mobile.allowCrossDomainPages = true;
 	$.support.touchOverflow = true;
   $.mobile.touchOverflowEnabled = true;
+
+
 });
 
 		$(function(){
 			var menuStatus;
 
 			// Show menu
-			$("a.showMenu").click(function(){
+			$("a.showMenu").live("click", function (event) {
 				if(menuStatus != true){	
 				document.getElementById("menu").style.visibility = 'visible';	
 				$(".ui-page-active").animate({
@@ -33,7 +35,7 @@ $(document).bind("mobileinit", function(){
 			
 			
 			// Menu behaviour
-			$("#menu li a").click(function(){
+			$("#menu li a").live("click", function (event) {
 
 				$('.currentSeccion').removeClass('currentSeccion');
 				$(this).parent().addClass('currentSeccion');
@@ -45,7 +47,7 @@ $(document).bind("mobileinit", function(){
 				return true;
 			});
 
-			$(".content-primary a").click(function(){
+			$(".content-primary a").live("click", function (event) {
 
 				$(".ui-page-active").css("margin-left","0");
 				menuStatus = false;
@@ -55,72 +57,6 @@ $(document).bind("mobileinit", function(){
 			});
 
 			
-			$("#ownLists .tabs a, #favoriteLists .tabs a").click(function(){
-				var tab = this.getAttribute('tab');
-				if(tab == "favoriteLists")
-				{
-					/*if($(".ui-page-active")[0].id == "favoriteLists")
-					return false;
-					var list = $( "#favoriteLists" ).find( "#favorites" );
-					list.empty();
-					var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
-					list.append(html);
-					$('#favorites').listview("refresh");*/
-					return true;
-				}else
-				if(tab == "ownLists")
-				{
-					/*if($(".ui-page-active")[0].id == "ownLists")
-					return false;
-					var list = $( "#ownLists" ).find( "#owns" );
-					list.empty();
-					var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
-					list.append(html);
-					$('#owns').listview("refresh");*/
-					return true;
-				}else
-				return false;
-
-			});
-
-			$("#searchMusic .tabs a, #searchLists .tabs a").click(function(){
-				var tab = this.getAttribute('tab');
-				//alert(tab);
-				if(tab == "music")
-				{
-					/*if($(".ui-page-active")[0].id == "searchArtists")
-					return false;
-					$.mobile.pageLoading();
-					var list = $( "#searchMusic" ).find( "#music" );
-					list.empty();
-					//var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
-     				var ajax = new XMLHttpRequest();
-     				ajax.open("GET","http://www.moonsik.com/iphone2/ayax/busqueda2.php?q=baila",true);
-     				ajax.send();
- 
-     				ajax.onreadystatechange=function(){
-          				if(ajax.readyState==4 && (ajax.status==200)){
-               				list.append(ajax.responseText);
-          				}else
-          				alert("chupala");
-    				 }
-					//list.append(html);
-					$('#music').listview("refresh");
-					$.mobile.pageLoading( true );*/ 
-					return true;
-				}else
-				if(tab == "lists")
-				{
-					/*if($(".ui-page-active")[0].id == "searchLists")
-					return false;
-					var list = $( "#searchLists" ).find( "#lists" );
-					list.empty();
-					var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
-					list.append(html);
-					$('#lists').listview("refresh");*/
-					return true;
-				}
-			});
 
 			$( '#ownLists' ).live( 'pageshow',function(event, ui)
 			{
@@ -201,4 +137,5 @@ $(document).bind("mobileinit", function(){
 			
 
 });
+
 
