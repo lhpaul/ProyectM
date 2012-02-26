@@ -20,6 +20,8 @@ $(document).bind("mobileinit", function(){
 					marginLeft: '165px'
 				  }, 300, function(){
 					  menuStatus = true;
+					   //$.mobile.loadPage( "ownLists.html" );
+            			//$.mobile.loadPage( "friends.html" );
 					});
 				  return true;
 				  } else {
@@ -37,6 +39,7 @@ $(document).bind("mobileinit", function(){
 			// Menu behaviour
 			$("#menu li a").live("click", function (event) {
 
+				$.mobile.loadPage(this.getAttribute("goTo")+".html");
 				$('.currentSeccion').removeClass('currentSeccion');
 				$(this).parent().addClass('currentSeccion');
 
@@ -56,6 +59,13 @@ $(document).bind("mobileinit", function(){
 				return true;
 			});
 
+			/*$("#ownLists .tabs li a, #favoriteLists .tabs li a").live("click", function (event) {
+
+				alert(this.getAttribute("tab"));
+				$.mobile.loadPage(this.getAttribute("tab")+".html");
+
+				return true;
+			});*/
 			
 
 			$( '#ownLists' ).live( 'pageshow',function(event, ui)
@@ -66,6 +76,8 @@ $(document).bind("mobileinit", function(){
 				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
 				list.append(html);
 				$('#owns').listview("refresh");
+				$.mobile.loadPage("favoriteLists.html");
+				$.mobile.loadPage( "friends.html" );
 				$.mobile.hidePageLoadingMsg();
 			});
 
@@ -77,6 +89,7 @@ $(document).bind("mobileinit", function(){
 				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
 				list.append(html);
 				$('#favorites').listview("refresh");
+				$.mobile.loadPage("ownLists.html");
 				$.mobile.hidePageLoadingMsg();
 			});
 
@@ -134,7 +147,17 @@ $(document).bind("mobileinit", function(){
 			});
 
 
-			
+			$( '#friends' ).live( 'pageshow',function(event, ui)
+			{
+				$.mobile.showPageLoadingMsg();
+  				var list = $( "#friends" ).find( "#friendsList" );
+				list.empty();
+				var html = '<li><a href="index.html"><img src="images/album-bb.jpg" /><h3>Broken Bells</h3><p>Broken Bells</p></a></li><li><a href="index.html"><img src="images/album-hc.jpg" /><h3>Warning</h3><p>Hot Chip</p></a></li>';
+				list.append(html);
+				$('#friendsList').listview("refresh");
+				$.mobile.loadPage("ownLists.html");
+				$.mobile.hidePageLoadingMsg();
+			});
 
 });
 

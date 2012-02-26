@@ -56,6 +56,7 @@ FB.Event.subscribe('auth.login', function(response) {
                 FB.login(
                     function(response) {
                         if (response.session) {
+                            //$.mobile.changePage( "logged.html", { transition: "fade"} );
                             changeMenu();
                             alert('logged in');
                         } else {
@@ -66,24 +67,39 @@ FB.Event.subscribe('auth.login', function(response) {
                 );
             }
 
-            function changeMenu()
-            {
-                var html = '<h3><span>Welcome,</span><br /> <em>Luis Hernan</em></h3>';
-                var men = $( "#menu" ).find("#memberDetails");
-                men.empty();
-                men.append(html);
-                html = '<li><a href="#ownLists" class="contentLink">My Lists<span class="icon"></span></a></li><li class="currentSeccion"><a href="#searchMusic" class="contentLink">Search<span class="icon"></span></a></li><li><a href="footer-persist-a.html" class="contentLink">Friends<span class="icon"></span></a></li>';
-                men = $( "#menu" ).find( "#menuList");
-                men.empty();
-                men.append(html);
+            function changeMenu () {
+                var list = $( "#menu" ).find( "#memberDetails" );
+                list.empty();
+                var html = '<h3><span>Welcome Luis Hernan</span></h3>';
+                list.append(html);
+                var list = $( "#menu" ).find( "#memberDetails" );
+                list.empty();
+                var html = '<h3><span>Welcome Luis Hernan</span></h3>';
+                list.append(html);
+
+                var list = $( "#menu" ).find( "#memberDetails" );
+                list.empty();
+                var html = '<h3><span>Welcome Luis Hernan</span></h3>';
+                list.append(html);
+                var list = $( "#menu" ).find( "#menuList" );
+                list.empty();
+                var html = '<li class="currentSeccion"><a href="#ownLists" class="contentLink" goTo="ownLists">My Lists<span class="icon"></span></a></li><li><a href="#searchMusic" class="contentLink" goTo="searchMusic">Search<span class="icon"></span></a></li><li class="currentSeccion"><a href="#friends" goTo="friends">Friends<span class="icon"></span></a></li>';
+                list.append(html);
+
+                $.mobile.loadPage( "ownLists.html" );
+                $.mobile.loadPage( "friends.html" );
                 return true;
             }
 
-            document.addEventListener('deviceready', function() {
-                try {
-                    alert('Device is ready! Make sure you set your app_id below this alert.');
-                    FB.init({ appId: "129284287187173", nativeInterface: PG.FB });
-                } catch (e) {
-                    alert(e);
-                }
-            }, false);
+        function playAudio() {
+            $.mobile.showPageLoadingMsg();
+            //console.log("empieza");
+            my_media = new Audio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');
+            my_media.id = 'playerMyAdio';
+            my_media.play();
+            $.mobile.hidePageLoadingMsg();
+            //console.log("termina");
+            return true;
+
+        }
+
