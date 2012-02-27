@@ -11,6 +11,9 @@ PG.FB = {
       var session = JSON.parse(localStorage.getItem('pg_fb_session') || '{"expires":0}');
       if (session && session.expires > new Date().valueOf()) {
         FB.Auth.setSession(session, 'connected');
+        changeMenu();
+        console.log('Logeado');
+        PhoneGap.exec(null, null, 'com.phonegap.facebook.Connect', 'restoreSession', [session.access_token, session.expires]);
       }
       console.log('PhoneGap Facebook Connect plugin initialized successfully.');
     }, (fail?fail:null), 'com.phonegap.facebook.Connect', 'init', [apiKey]);

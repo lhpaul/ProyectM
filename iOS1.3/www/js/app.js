@@ -73,11 +73,11 @@ $(document).bind("mobileinit", function(){
 				$.mobile.showPageLoadingMsg();
   				var list = $( "#ownLists" ).find( "#owns" );
 				list.empty();
-				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
+				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
 				list.append(html);
 				$('#owns').listview("refresh");
-				$.mobile.loadPage("favoriteLists.html");
-				$.mobile.loadPage( "friends.html" );
+				//$.mobile.loadPage("favoriteLists.html");
+				//$.mobile.loadPage( "friends.html" );
 				$.mobile.hidePageLoadingMsg();
 			});
 
@@ -89,7 +89,7 @@ $(document).bind("mobileinit", function(){
 				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
 				list.append(html);
 				$('#favorites').listview("refresh");
-				$.mobile.loadPage("ownLists.html");
+				//$.mobile.loadPage("ownLists.html");
 				$.mobile.hidePageLoadingMsg();
 			});
 
@@ -149,16 +149,19 @@ $(document).bind("mobileinit", function(){
 
 			$( '#friends' ).live( 'pageshow',function(event, ui)
 			{
+				//alert(this.getAttribute("status"));
+				if(this.getAttribute("status"))
+				{
 				$.mobile.showPageLoadingMsg();
-  				var list = $( "#friends" ).find( "#friendsList" );
-				list.empty();
-				var html = '<li><a href="index.html"><img src="images/album-bb.jpg" /><h3>Broken Bells</h3><p>Broken Bells</p></a></li><li><a href="index.html"><img src="images/album-hc.jpg" /><h3>Warning</h3><p>Hot Chip</p></a></li>';
-				list.append(html);
-				$('#friendsList').listview("refresh");
-				$.mobile.loadPage("ownLists.html");
-				$.mobile.hidePageLoadingMsg();
+  				getFriends();
+
+  				this.removeAttribute("status")
+				//$.mobile.loadPage("ownLists.html");
+				//$.mobile.hidePageLoadingMsg();
+			}else
+			alert("no");
+			//alert(this.getAttribute("status"));
 			});
 
+
 });
-
-

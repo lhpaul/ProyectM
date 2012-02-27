@@ -31,24 +31,28 @@ FB.Event.subscribe('auth.login', function(response) {
                 });
             }
             
-            function me() {
-                FB.api('/me/friends', function(response) {
+            function getFriends() {
+                FB.api('/me/friends',{ fields: 'name,id,picture' } ,function(response) {
                 	if (response.error) {
                     	alert(JSON.stringify(response.error));
                 	} else {
-	                    var data = document.getElementById('data');
-	                    response.data.forEach(function(item) {
-	                        var d = document.createElement('div');
-	                        d.innerHTML = item.name;
-	                        data.appendChild(d);
-	                    });
+                        var list = $( "#friends" ).find( "#friendsList" );
+                        list.empty();
+                        var friends = response.data;
+                        for (var i = 0; i < friends.length; i++) {
+                            var html = "<li><a href='#'><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
+                            list.append(html);
+                        }
+                        $('#friendsList').listview("refresh");
+                        $.mobile.hidePageLoadingMsg();
                 	}
                 });
             }
             
             function logout() {
                 FB.logout(function(response) {
-                    alert('logged out');
+                    changeMenuBack();
+                    //alert('logged out');
                 });
             }
             
@@ -58,7 +62,7 @@ FB.Event.subscribe('auth.login', function(response) {
                         if (response.session) {
                             //$.mobile.changePage( "logged.html", { transition: "fade"} );
                             changeMenu();
-                            alert('logged in');
+                            //alert('logged in');
                         } else {
                             alert('not logged in');
                         }
@@ -72,22 +76,26 @@ FB.Event.subscribe('auth.login', function(response) {
                 list.empty();
                 var html = '<h3><span>Welcome Luis Hernan</span></h3>';
                 list.append(html);
-                var list = $( "#menu" ).find( "#memberDetails" );
-                list.empty();
-                var html = '<h3><span>Welcome Luis Hernan</span></h3>';
-                list.append(html);
 
-                var list = $( "#menu" ).find( "#memberDetails" );
-                list.empty();
-                var html = '<h3><span>Welcome Luis Hernan</span></h3>';
-                list.append(html);
                 var list = $( "#menu" ).find( "#menuList" );
                 list.empty();
-                var html = '<li class="currentSeccion"><a href="#ownLists" class="contentLink" goTo="ownLists">My Lists<span class="icon"></span></a></li><li><a href="#searchMusic" class="contentLink" goTo="searchMusic">Search<span class="icon"></span></a></li><li class="currentSeccion"><a href="#friends" goTo="friends">Friends<span class="icon"></span></a></li>';
+                var html = '<li class="currentSeccion"><a href="#ownLists" class="contentLink" goTo="ownLists">My Lists<span class="icon"></span></a></li><li><a href="#searchMusic" class="contentLink" goTo="searchMusic">Search<span class="icon"></span></a></li><li class="currentSeccion"><a href="#friends" goTo="friends">Friends<span class="icon"></span></a></li><li class="currentSeccion"><a href="#searchMusic" goTo="logout" onClick="logout()">Log Out<span class="icon"></span></a></li>';
                 list.append(html);
 
-                $.mobile.loadPage( "ownLists.html" );
-                $.mobile.loadPage( "friends.html" );
+                //$.mobile.loadPage( "ownLists.html" );
+                //$.mobile.loadPage( "friends.html" );
+                return true;
+            }
+            function changeMenuBack () {
+                var list = $( "#menu" ).find( "#memberDetails" );
+                list.empty();
+                var html = '<h3><span>Guest</span></h3>';
+                list.append(html);
+
+                var list = $( "#menu" ).find( "#menuList" );
+                list.empty();
+                var html = '<li class="currentSeccion"><a href="#" class="contentLink" onclick="login()">Login<span class="icon"></span></a></li>';
+                list.append(html);
                 return true;
             }
 
