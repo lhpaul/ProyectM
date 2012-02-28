@@ -1,7 +1,7 @@
-if (typeof PhoneGap == 'undefined') alert('PhoneGap variable does not exist. Check that you have included phonegap.js correctly');
+/*if (typeof PhoneGap == 'undefined') alert('PhoneGap variable does not exist. Check that you have included phonegap.js correctly');
             if (typeof PG == 'undefined') alert('PG variable does not exist. Check that you have included pg-plugin-fb-connect.js correctly');
             if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
-
+*/
 FB.Event.subscribe('auth.login', function(response) {
                 //alert('auth.login event');
             });
@@ -62,7 +62,7 @@ FB.Event.subscribe('auth.login', function(response) {
                         if (response.session) {
                             //$.mobile.changePage( "logged.html", { transition: "fade"} );
                             changeMenu();
-                            //alert('logged in');
+                            $.mobile.changePage( "#ownLists", { transition: "slide"} );
                         } else {
                             alert('not logged in');
                         }
@@ -79,7 +79,7 @@ FB.Event.subscribe('auth.login', function(response) {
 
                 var list = $( "#menu" ).find( "#menuList" );
                 list.empty();
-                var html = '<li class="currentSeccion"><a href="#ownLists" class="contentLink" goTo="ownLists">My Lists<span class="icon"></span></a></li><li><a href="#searchMusic" class="contentLink" goTo="searchMusic">Search<span class="icon"></span></a></li><li class="currentSeccion"><a href="#friends" goTo="friends">Friends<span class="icon"></span></a></li><li class="currentSeccion"><a href="#searchMusic" goTo="logout" onClick="logout()">Log Out<span class="icon"></span></a></li>';
+                var html = '<li><a href="#ownLists"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>My Lists</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Search</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#friends"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Friends</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Logout</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li>';
                 list.append(html);
 
                 //$.mobile.loadPage( "ownLists.html" );
@@ -94,7 +94,7 @@ FB.Event.subscribe('auth.login', function(response) {
 
                 var list = $( "#menu" ).find( "#menuList" );
                 list.empty();
-                var html = '<li class="currentSeccion"><a href="#" class="contentLink" onclick="login()">Login<span class="icon"></span></a></li>';
+                var html = '<li><a href="#" class="ui-btn ui-btn-up-b ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined" onClick="login()"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Login</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#" class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Login</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li>';
                 list.append(html);
                 return true;
             }

@@ -39,7 +39,7 @@ $(document).bind("mobileinit", function(){
 			// Menu behaviour
 			$("#menu li a").live("click", function (event) {
 
-				$.mobile.loadPage(this.getAttribute("goTo")+".html");
+				//$.mobile.loadPage(this.getAttribute("goTo")+".html");
 				$('.currentSeccion').removeClass('currentSeccion');
 				$(this).parent().addClass('currentSeccion');
 
@@ -158,8 +158,7 @@ $(document).bind("mobileinit", function(){
   				this.removeAttribute("status")
 				//$.mobile.loadPage("ownLists.html");
 				//$.mobile.hidePageLoadingMsg();
-			}else
-			alert("no");
+			}
 			//alert(this.getAttribute("status"));
 			});
 

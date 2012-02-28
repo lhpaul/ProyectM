@@ -71,19 +71,33 @@
 	<script src="jquery.mobile-1.0.1.min.js"></script>
   </head>
   <body onload="onBodyLoad()">
-  <div id="menu">
+  <div id="menu" class="ui-body ui-body-a">
 				<div id="memberDetails">
 					<h3><span>Guest</span></h3>
 				</div>
-				<ul id="menuList">
-					<li class="currentSeccion"><a href="#" class="contentLink" onclick="login()">Login<span class="icon"></span></a></li>
-				</ul>
+					<ul id="menuList">
+				<li><a href="#" class="ui-btn ui-btn-up-b ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined" onClick="login()">
+						<span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom">
+							<span>Login</span>
+							<span class="ui-icon ui-icon-star ui-icon-shadow"></span>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined">
+						<span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom">
+							<span>Login</span>
+							<span class="ui-icon ui-icon-star ui-icon-shadow"></span>
+						</span>
+					</a>
+				</li>
+					</ul>	
 	</div>
 
 <div data-role="page" id="searchMusic">
 
     <div data-role="header" data-id="searchHead" data-position="fixed">
-        <h1>Search by</h1>
+        <h1>Search</h1>
         <a href="#" class="showMenu menuBtn ui-btn-left"></a>
         <div data-role="navbar" class = "tabs">
             <ul>
