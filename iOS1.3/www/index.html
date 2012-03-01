@@ -6,55 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 	<meta charset="utf-8">
 
-
-	<!-- iPad/iPhone specific css below, add after your main css >
-	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
-	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
-	-->
-	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
-	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
     <script type="text/javascript">
 
-
-	// If you want to prevent dragging, uncomment this section
-	/*
-	function preventBehavior(e) 
-	{ 
-      e.preventDefault(); 
-    };
-	document.addEventListener("touchmove", preventBehavior, false);
-	*/
-	
-	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
-	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-	for more details -jm */
-	/*
-	function handleOpenURL(url)
-	{
-		// TODO: do something with the url passed in.
-	}
-	*/
 	
 	function onBodyLoad()
-	{		
-		document.addEventListener("deviceready", onDeviceReady, false);
-
-	}
-	
-	/* When this function is called, PhoneGap has been initialized and is ready to roll */
-	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
-	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-	for more details -jm */
-	function onDeviceReady()
 	{
 		try {
                     //alert('Device is ready! Make sure you set your app_id below this alert.');
-                    FB.init({ appId: "129284287187173", nativeInterface: PG.FB });
+                    FB.init({ appId: "129284287187173"});
                 } catch (e) {
                     alert(e);
                 }
 	}
-
+	
     </script>
 
     <link rel="stylesheet" href="jquery.mobile-1.0.1.min.css" />
@@ -65,10 +29,17 @@
     <script src="pg-plugin-fb-connect.js"></script>
     <!-- facebook js sdk -->
     <script src="facebook_js_sdk.js"></script>
+	
+	<!-- jplayer sdk -->
+	
+	<script type="text/javascript" src="jplayer/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="jplayer/js/jplayer.playlist.min.js"></script>
+	
 
 	<script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/fb.js"></script>
 	<script src="jquery.mobile-1.0.1.min.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
   </head>
   <body onload="onBodyLoad()">
   <div id="menu" class="ui-body ui-body-a">
@@ -116,7 +87,6 @@
     	</form>
     <p></p>
     <ul id="music" data-role="listview">
-    <li><a href="#" onclick="playAudio()">Acura</a></li>
     </ul>
     </div>
     </div><!-- /content -->
@@ -235,7 +205,42 @@
 
 	<div data-role="content" >	
 	<div class="content-primary">
+		
 	
+	
+	</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+
+
+<!-- Pagina que aparece cuando se apreta click en una cancion -->
+<div data-role="page" id="songinfo">
+
+	<div data-role="header" data-id="lists">
+		<h1>My Lists</h1>
+		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
+		
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	<ul id="song" data-role="listview" data-filter="false" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+	</ul>
+	</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-theme="d">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+
+<div id="bplayer">
+
 	<div id="jp_container_N" class="jp-video jp-video-270p">
 			<div class="jp-type-playlist">
 				<div id="jquery_jplayer_N" class="jp-jplayer"></div>
@@ -282,7 +287,8 @@
 					</div>
 				</div>
 				<div class="jp-playlist">
-					<ul>
+				
+					<ul data-role="listview">
 						<!-- The method Playlist.displayPlaylist() uses this unordered list -->
 						<li></li>
 					</ul>
@@ -293,39 +299,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		<a href="#" onclick="addToPlaylist(4779);"> agregar</a>
-	
-	</div>
-	</div><!-- /content -->
-	
-	<div data-role="footer" data-theme="d">
-		<h4>Page Footer</h4>
-	</div><!-- /footer -->
-</div><!-- /page one -->
 
-
-
-<!-- Pagina que aparece cuando se apreta click en una cancion -->
-<div data-role="page" id="songinfo">
-
-	<div data-role="header" data-id="lists">
-		<h1>My Lists</h1>
-		<a href="#" class="showMenu menuBtn ui-btn-left"></a>
-		
-	</div><!-- /header -->
-
-	<div data-role="content" >	
-	<div class="content-primary">
-	<ul id="song" data-role="listview" data-filter="false" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
-	</ul>
-	</div>
-	</div><!-- /content -->
-	<div data-role="footer" data-theme="d">
-		<h4>Page Footer</h4>
-	</div><!-- /footer -->
-</div><!-- /page one -->
+</div>
 
 
 
