@@ -205,7 +205,7 @@ $(document).bind("mobileinit", function(){
 
   				$.mobile.showPageLoadingMsg();	
 
-  					var dir = "../ayax/busqueda2.php?q="+search;
+  					var dir = host + "ayax/busqueda2.php?q="+search;
 
   					//alert(dir);
 
@@ -257,7 +257,7 @@ $(document).bind("mobileinit", function(){
 
   				$.mobile.showPageLoadingMsg();	
 
-  					var dir = "../ayax/busqueda2.php?q="+search;
+  					var dir = host + "ayax/busqueda2.php?q="+search;
 
   					//alert(dir);
 

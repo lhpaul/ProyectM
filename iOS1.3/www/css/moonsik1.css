@@ -1,4 +1,4 @@
-#menu{
+﻿#menu{
 			width:165px;
 			height:100%;
 			display:block !important;
@@ -77,6 +77,12 @@
 strong { font-style: bold; }
 
 
+
+
+/*configuracion player */
+
+
+
 #bplayer {
 
 
@@ -88,4 +94,83 @@ height:30%;
 background-color:black;
 
 
+
+
 }
+
+.jp-playlist {
+
+position:absolute;
+left:0px;
+top:-160%;
+width:100%;
+
+
+
+}
+
+.jp-controls{
+	background: url('../images/playerbg.png') repeat-x;
+	float: left;
+	width: 100%;
+	height: 65px;
+	margin-left: auto;
+	margin-right: auto;
+	position:relative;
+	top:0px;
+	overflow-x:hidden;
+white-space:nowrap; 
+	
+}
+
+a.jp-previous {text-decoration:none; width:35px; height:40px; text-indent:-50000em; background:url(../images/previous.png) no-repeat center; display:block; text-align:center; position:relative; top:0px; float:left; margin-left: 40%;  margin-top:5px;}
+a.jp-next {text-decoration:none; width:35px; height:40px; text-indent:-50000em; background:url(../images/next.png) no-repeat center; display:block; text-align:center; position:relative; top:0px; float:left; margin-left: 10px; margin-top:5px;}
+
+a.jp-play {text-decoration:none; width:44px; height:50px; text-indent:-50000em; background:url(../images/play.png) no-repeat center; display:block; text-align:center;   position:relative; top:0px; float:left; margin-left: 10px; margin-top:0px;}
+a.jp-pause {text-decoration:none; width:44px; height:50px; text-indent:-50000em; background:url(../images/pause.png) no-repeat center; display:block; text-align:center;  position:relative; top:0px; float:left; margin-left: 10px; margin-top:0px;}
+
+.jp-controls li {
+display:inline; 
+	
+}
+
+a.jp-stop { visibility:hidden;
+
+}
+
+
+a.jp-mute { visibility:hidden;
+
+}
+
+
+a.jp-volume-max { visibility:hidden;
+
+}
+
+
+a.jp-shuffle { visibility:hidden;
+
+}
+
+a.jp-repeat { visibility:hidden;
+
+}
+
+
+a.jp-full-screen { visibility:hidden;
+
+}
+
+
+
+.jp-playlist ul{	
+	overflow-x:hidden;
+white-space:nowrap; 
+
+
+	
+}
+
+
+
