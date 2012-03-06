@@ -2,6 +2,8 @@
             if (typeof PG == 'undefined') alert('PG variable does not exist. Check that you have included pg-plugin-fb-connect.js correctly');
             if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 */
+
+var userId;
 FB.Event.subscribe('auth.login', function(response) {
                 //alert('auth.login event');
             });
@@ -60,9 +62,35 @@ FB.Event.subscribe('auth.login', function(response) {
                 FB.login(
                     function(response) {
                         if (response.session) {
-                            //$.mobile.changePage( "logged.html", { transition: "fade"} );
                             changeMenu();
                             $.mobile.changePage( "#ownLists", { transition: "slide"} );
+                            
+                         	FB.api('/me', function(response)
+            				{
+            					if (response.error) {
+                    				alert(JSON.stringify(response.error));
+                    				return false;
+                				} else
+                				{
+                					var dir = "ayax/getUserIdFB.php?id="+ response.id;
+  									alert(dir);
+									var request = $.ajax({
+      									type: "GET",
+      									url: dir,
+	  									cache: false,
+     									});
+     								request.done(function(msg) {
+  											userId = msg;
+                							changeOwnLists();
+										});
+
+									request.fail(function(jqXHR, textStatus) {
+  											alert( "Request failed: " + textStatus );
+										});
+										//termino rquest
+                				}
+							});
+                            
                         } else {
                             alert('not logged in');
                         }
@@ -106,8 +134,30 @@ FB.Event.subscribe('auth.login', function(response) {
 
         }
         
+        function changeOwnLists()
+        {
+        	var dir = host + "ayax/ownLists.php?q="+ userId;
+  					alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+     				request.done(function(msg) {
+  							var list = $( "#ownLists" ).find( "#owns" );
+							list.empty();
+							list.append(msg);
+							$('#owns').listview("refresh");
+						});
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+						});
+				$.mobile.hidePageLoadingMsg();
+        }
         
-function ChangeFacebookName() 	{
+        
+        function ChangeFacebookName() 	{
 FB.api('/me', function(response) { 
 
 var list = $( "#menu" ).find( "#memberDetails" );
@@ -127,5 +177,4 @@ var list = $( "#menu" ).find( "#memberDetails" );
 
 
 }
-
 
