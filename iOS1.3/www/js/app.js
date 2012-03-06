@@ -3,15 +3,10 @@ var host = "../";
 
 
 $(document).bind("mobileinit", function(){
-
 	$.mobile.pushStateEnabled = true;
-
 	$.mobile.allowCrossDomainPages = true;
-
 	$.support.touchOverflow = true;
-
   $.mobile.touchOverflowEnabled = true;
-
 
 
 
@@ -21,31 +16,22 @@ $(document).bind("mobileinit", function(){
 
 
 		$(function(){
-
 			var menuStatus;
 
 
 
 			// Show menu
 
-			$("a.showMenu").live("click", function (event) {
-			
+			$("a.showMenu").live("click", function (event) {			
 			  document.getElementById("bplayer").style.left = "-2000px";
-
 				if(menuStatus != true){	
-
 				document.getElementById("menu").style.visibility = 'visible';	
-
 				$(".ui-page-active").animate({
-
 					marginLeft: '165px'
 
 				  }, 300, function(){
-
 					  menuStatus = true;
-
 					   //$.mobile.loadPage( "ownLists.html" );
-
             			//$.mobile.loadPage( "friends.html" );
 
 					});
@@ -61,7 +47,6 @@ $(document).bind("mobileinit", function(){
 				  }, 300, function(){
 
 					  menuStatus = false;
-
 					  document.getElementById("menu").style.visibility = 'hidden';
 
 					});
@@ -86,21 +71,11 @@ $(document).bind("mobileinit", function(){
 
 
 				//$.mobile.loadPage(this.getAttribute("goTo")+".html");
-
 				$('.currentSeccion').removeClass('currentSeccion');
-
 				$(this).parent().addClass('currentSeccion');
-
-
-
 				$(".ui-page-active").css("margin-left","0");
-
 				menuStatus = false;
-
 				document.getElementById("menu").style.visibility = 'hidden';
-
-
-
 				return true;
 
 			});
