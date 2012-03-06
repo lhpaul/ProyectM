@@ -1,4 +1,4 @@
-var host = "../";
+var host = "";
 
 
 
@@ -112,16 +112,11 @@ $(document).bind("mobileinit", function(){
 
 
 			$( '#ownLists' ).live( 'pageshow',function(event, ui)
-			{	$.mobile.showPageLoadingMsg();
-  				var list = $( "#ownLists" ).find( "#owns" );
-				list.empty();
-				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
-				list.append(html);
-				$('#owns').listview("refresh");
-				//$.mobile.loadPage("favoriteLists.html");
-				//$.mobile.loadPage( "friends.html" );
-				$.mobile.hidePageLoadingMsg();
-
+			{
+				$.mobile.showPageLoadingMsg();
+				if(userId){
+				changeOwnLists();
+				}
 			});
 
 
