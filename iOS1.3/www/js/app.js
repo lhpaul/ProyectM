@@ -6,7 +6,7 @@ $(document).bind("mobileinit", function(){
 	$.mobile.pushStateEnabled = true;
 	$.mobile.allowCrossDomainPages = true;
 	$.support.touchOverflow = true;
-  $.mobile.touchOverflowEnabled = true;
+   $.mobile.touchOverflowEnabled = true;
 
 
 
@@ -101,15 +101,8 @@ $(document).bind("mobileinit", function(){
 
 
 			/*$("#ownLists .tabs li a, #favoriteLists .tabs li a").live("click", function (event) {
-
-
-
 				alert(this.getAttribute("tab"));
-
 				$.mobile.loadPage(this.getAttribute("tab")+".html");
-
-
-
 				return true;
 
 			});*/
@@ -119,25 +112,14 @@ $(document).bind("mobileinit", function(){
 
 
 			$( '#ownLists' ).live( 'pageshow',function(event, ui)
-
-			{
-
-				$.mobile.showPageLoadingMsg();
-
+			{	$.mobile.showPageLoadingMsg();
   				var list = $( "#ownLists" ).find( "#owns" );
-
 				list.empty();
-
 				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li><li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
-
 				list.append(html);
-
 				$('#owns').listview("refresh");
-
 				//$.mobile.loadPage("favoriteLists.html");
-
 				//$.mobile.loadPage( "friends.html" );
-
 				$.mobile.hidePageLoadingMsg();
 
 			});
@@ -145,23 +127,13 @@ $(document).bind("mobileinit", function(){
 
 
 			$( '#favoriteLists' ).live( 'pageshow',function(event, ui)
-
-			{
-
-				$.mobile.showPageLoadingMsg();
-
+			{	$.mobile.showPageLoadingMsg();
   				var list = $( "#favoriteLists" ).find( "#favorites" );
-
 				list.empty();
-
 				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
-
 				list.append(html);
-
 				$('#favorites').listview("refresh");
-
 				//$.mobile.loadPage("ownLists.html");
-
 				$.mobile.hidePageLoadingMsg();
 
 			});
@@ -171,37 +143,24 @@ $(document).bind("mobileinit", function(){
 
 
 			$("#searchMusic #musicForm").submit(function() {
-
   				var search = this.elements[0].value;
-
   				if(search == 0)
-
   				return false;
-
   				$.mobile.showPageLoadingMsg();	
-
-  					var dir = host + "ayax/busqueda2.php?q="+search;
-
+  				var dir = host + "ayax/busqueda2.php?q="+search;
   					//alert(dir);
 
 					var request = $.ajax({
-
       					type: "GET",
-
       					url: dir,
-
 	  					cache: false,
 
      					});
 
      				request.done(function(msg) {
-
   							var list = $( "#searchMusic" ).find( "#music" );
-
 							list.empty();
-
 							list.append(msg);
-
 							$('#music').listview("refresh");
 
 						});
@@ -209,13 +168,10 @@ $(document).bind("mobileinit", function(){
 
 
 					request.fail(function(jqXHR, textStatus) {
-
   							alert( "Request failed: " + textStatus );
 
 						});
-
 				$.mobile.hidePageLoadingMsg();
-
     			return false;
 
 			});
@@ -225,45 +181,28 @@ $(document).bind("mobileinit", function(){
 			$("#searchLists #searchForm").submit(function() {
 
   				var search = this.elements[0].value;
-
   				if(search == 0)
-
   				return false;
-
   				$.mobile.showPageLoadingMsg();	
-
   					var dir = host + "ayax/busqueda2.php?q="+search;
-
   					//alert(dir);
-
 					var request = $.ajax({
-
       					type: "GET",
-
       					url: dir,
-
 	  					cache: false,
-
      					});
 
      				request.done(function(msg) {
-
   							var list = $( "#searchLists" ).find( "#lists" );
-
 							list.empty();
-
 							list.append(msg);
-
 							$('#lists').listview("refresh");
-
 						});
 
 
 
 					request.fail(function(jqXHR, textStatus) {
-
   							alert( "Request failed: " + textStatus );
-
 						});
 
 				$.mobile.hidePageLoadingMsg();
@@ -277,27 +216,15 @@ $(document).bind("mobileinit", function(){
 
 
 			$( '#friends' ).live( 'pageshow',function(event, ui)
-
 			{
-
 				//alert(this.getAttribute("status"));
-
 				if(this.getAttribute("status"))
-
 				{
-
 				$.mobile.showPageLoadingMsg();
-
   				getFriends();
-
-
-
   				this.removeAttribute("status")
-
 				//$.mobile.loadPage("ownLists.html");
-
 				//$.mobile.hidePageLoadingMsg();
-
 			}
 
 			//alert(this.getAttribute("status"));
