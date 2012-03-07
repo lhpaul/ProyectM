@@ -4,6 +4,7 @@
 */
 
 var userId;
+var userFbId;
 FB.Event.subscribe('auth.login', function(response) {
                 //alert('auth.login event');
             });
@@ -40,14 +41,38 @@ FB.Event.subscribe('auth.login', function(response) {
                 	} else {
                         var list = $( "#friends" ).find( "#friendsList" );
                         list.empty();
-                        var friends = response.data;
-                        for (var i = 0; i < friends.length; i++) {
-                            var html = "<li><a href='#'><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
-                            list.append(html);
-                        }
-                        $('#friendsList').listview("refresh");
-                        $.mobile.hidePageLoadingMsg();
+                        
+                        var jsonObjects = response.data;
+ 
+						jQuery.ajax({
+          						url: "ayax/getFriends.php",
+          						type: "POST",
+          						data: {friends: JSON.stringify(jsonObjects) },
+          						dataType: "json",
+          						beforeSend: function(x) {
+            						if (x && x.overrideMimeType) {
+              						x.overrideMimeType("application/j-son;charset=UTF-8");
+            						}
+          						},
+          						success: function(result) {
+          							if(result.error)
+          							alert(result.error);
+          							else{
+          							var friends = result["friends"];
+          							//alert(JSON.stringify(result["friends"]));          							
+                        			for (var i = 0; i < friends.length-1; i++) {
+                            			var html = "<li><a href='#'><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
+                            			list.append(html);
+                        			}
+                        			$('#friendsList').listview("refresh");
+                        		}
+                        			
+         						 }
+						});
+
                 	}
+                	
+                    $.mobile.hidePageLoadingMsg();
                 });
             }
             
@@ -72,8 +97,9 @@ FB.Event.subscribe('auth.login', function(response) {
                     				return false;
                 				} else
                 				{
+                					userFbId = response.id;
                 					var dir = "ayax/getUserIdFB.php?id="+ response.id;
-  									alert(dir);
+  									//alert(dir);
 									var request = $.ajax({
       									type: "GET",
       									url: dir,
@@ -137,7 +163,7 @@ FB.Event.subscribe('auth.login', function(response) {
         function changeOwnLists()
         {
         	var dir = host + "ayax/ownLists.php?q="+ userId;
-  					alert(dir);
+  					//alert(dir);
 					var request = $.ajax({
       					type: "GET",
       					url: dir,
@@ -158,23 +184,19 @@ FB.Event.subscribe('auth.login', function(response) {
         
         
         function ChangeFacebookName() 	{
-FB.api('/me', function(response) { 
+			FB.api('/me', function(response) { 
 
-var list = $( "#menu" ).find( "#memberDetails" );
-                list.empty();               
+			var list = $( "#menu" ).find( "#memberDetails" );
+                			list.empty();               
                 
-                var html = '<h3><span>'+response.name+'</span></h3>';
-                list.append(html);
+                			var html = '<h3><span>'+response.name+'</span></h3>';
+                			list.append(html);
 
-                var list = $( "#menu" ).find( "#menuList" );
-                list.empty();
-                var html = '<li><a href="#ownLists"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>My Lists</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Search</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#friends"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Friends</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Logout</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li>';
-                list.append(html);
-
-
-  return;
-});
-
-
-}
+                			var list = $( "#menu" ).find( "#menuList" );
+                			list.empty();
+                			var html = '<li><a href="#ownLists"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>My Lists</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Search</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#friends"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Friends</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Logout</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li>';
+                			list.append(html);
+  							return;
+				});
+				}
 
