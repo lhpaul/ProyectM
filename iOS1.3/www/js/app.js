@@ -1,14 +1,10 @@
 var host = "";
 
-
-
 $(document).bind("mobileinit", function(){
 	$.mobile.pushStateEnabled = true;
 	$.mobile.allowCrossDomainPages = true;
 	$.support.touchOverflow = true;
    $.mobile.touchOverflowEnabled = true;
-
-
 
 
 });
@@ -17,59 +13,55 @@ $(document).bind("mobileinit", function(){
 
 		$(function(){
 			var menuStatus;
-
-
-
 			// Show menu
-
 			$("a.showMenu").live("click", function (event) {			
 			  document.getElementById("bplayer").style.left = "-2000px";
-				if(menuStatus != true){	
+				if(!menuStatus){	
 				document.getElementById("menu").style.visibility = 'visible';	
 				$(".ui-page-active").animate({
 					marginLeft: '165px'
-
 				  }, 300, function(){
 					  menuStatus = true;
-					   //$.mobile.loadPage( "ownLists.html" );
-            			//$.mobile.loadPage( "friends.html" );
-
 					});
-
 				  return true;
-
 				  } else {
-
 					$(".ui-page-active").animate({
-
 					marginLeft: "0px"
-
 				  }, 300, function(){
-
 					  menuStatus = false;
 					  document.getElementById("menu").style.visibility = 'hidden';
-
 					});
-
 					return true;
-
 				  }
-				  
-				  
-					
-
 			});
-
 			
+			//Swipe events para el menu
+			$("body").swiperight(function() {
+				if(!menuStatus)
+				document.getElementById("menu").style.visibility = 'visible';	
+				$(".ui-page-active").animate({
+					marginLeft: '165px'
+				  }, 300, function(){
+					  menuStatus = true;
+					});
+				  return true;
+				});
+				
+				$("body").swipeleft(function() {
+				if(menuStatus)
+				$(".ui-page-active").animate({
+					marginLeft: "0px"
+				  }, 300, function(){
+					  menuStatus = false;
+					  document.getElementById("menu").style.visibility = 'hidden';
+					});
+					return true;
+				});
 
-			
 
-			// Menu behaviour
-
+			// Menu behavior
 			$("#menu li a").live("click", function (event) {
-
-
-
+				
 				//$.mobile.loadPage(this.getAttribute("goTo")+".html");
 				$('.currentSeccion').removeClass('currentSeccion');
 				$(this).parent().addClass('currentSeccion');
@@ -83,22 +75,20 @@ $(document).bind("mobileinit", function(){
 
 
 			$(".content-primary a").live("click", function (event) {
-
-
-
 				$(".ui-page-active").css("margin-left","0");
-
 				menuStatus = false;
-
 				document.getElementById("menu").style.visibility = 'hidden';
-
-
-
+				return true;
+			});
+			
+			$("#friends li a").live("click", function (event) {
+				
+				var id = this.getAttribute("fbId");
+				//alert(id);
+				document.getElementById('friendLists').setAttribute("fbId", id);
 				return true;
 
 			});
-
-
 
 			/*$("#ownLists .tabs li a, #favoriteLists .tabs li a").live("click", function (event) {
 				alert(this.getAttribute("tab"));
@@ -157,6 +147,7 @@ $(document).bind("mobileinit", function(){
 							list.empty();
 							list.append(msg);
 							$('#music').listview("refresh");
+							$.mobile.hidePageLoadingMsg();
 
 						});
 
@@ -164,9 +155,8 @@ $(document).bind("mobileinit", function(){
 
 					request.fail(function(jqXHR, textStatus) {
   							alert( "Request failed: " + textStatus );
-
+  							$.mobile.hidePageLoadingMsg();
 						});
-				$.mobile.hidePageLoadingMsg();
     			return false;
 
 			});
@@ -192,15 +182,16 @@ $(document).bind("mobileinit", function(){
 							list.empty();
 							list.append(msg);
 							$('#lists').listview("refresh");
+							$.mobile.hidePageLoadingMsg();
 						});
 
 
 
 					request.fail(function(jqXHR, textStatus) {
   							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
 						});
 
-				$.mobile.hidePageLoadingMsg();
 
     			return false;
 
@@ -215,8 +206,10 @@ $(document).bind("mobileinit", function(){
 				//alert(this.getAttribute("status"));
 				if(this.getAttribute("status"))
 				{
+					if(!friendsReady)
 				$.mobile.showPageLoadingMsg();
-  				getFriends();
+  				//getFriends();
+  				//printFriends();
   				this.removeAttribute("status");
 				//$.mobile.loadPage("ownLists.html");
 				//$.mobile.hidePageLoadingMsg();
@@ -224,6 +217,39 @@ $(document).bind("mobileinit", function(){
 
 			//alert(this.getAttribute("status"));
 
+			});
+			
+			$( '#friendLists' ).live( 'pageshow',function(event, ui)
+			{
+				
+			var id = this.getAttribute("fbId");
+			//alert(id);
+			var list = $( "#friendLists" ).find( "#flists" );
+			list.empty();
+			
+			$.mobile.showPageLoadingMsg();	
+  					var dir = host + "ayax/getFriendLists.php?q="+id;
+  					//alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+							list.empty();
+							list.append(msg);
+							$('#flists').listview("refresh");
+							$.mobile.hidePageLoadingMsg();
+						});
+
+
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
+						});
+			
 			});
 
 
