@@ -179,7 +179,7 @@ $(document).bind("mobileinit", function(){
   				if(search == 0)
   				return false;
   				$.mobile.showPageLoadingMsg();	
-  					var dir = host + "ayax/busqueda2.php?q="+search;
+  					var dir = host + "ayax/searchLists.php?q="+search;
   					//alert(dir);
 					var request = $.ajax({
       					type: "GET",
@@ -217,7 +217,7 @@ $(document).bind("mobileinit", function(){
 				{
 				$.mobile.showPageLoadingMsg();
   				getFriends();
-  				this.removeAttribute("status")
+  				this.removeAttribute("status");
 				//$.mobile.loadPage("ownLists.html");
 				//$.mobile.hidePageLoadingMsg();
 			}
