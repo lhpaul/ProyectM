@@ -39,6 +39,10 @@ FB.Event.subscribe('auth.login', function(response) {
             
             
             function logout() {
+            	userId = null;
+				userFbId = null;
+				userFriends  = null;
+				friendsReady = false;
             	changeMenuBack();
                 FB.logout(function(response) {
                     //alert('logged out');
