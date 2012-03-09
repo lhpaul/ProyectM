@@ -50,29 +50,31 @@ FB.Event.subscribe('auth.login', function(response) {
           						data: {friends: JSON.stringify(jsonObjects) },
           						dataType: "json",
           						beforeSend: function(x) {
-            						if (x && x.overrideMimeType) {
+            						if (x && x.overrideMimeType)
+            						{
               						x.overrideMimeType("application/j-son;charset=UTF-8");
             						}
           						},
           						success: function(result) {
-          							if(result.error)
+          							if(result.error){
           							alert(result.error);
+          							$.mobile.hidePageLoadingMsg();
+          							}
           							else{
-          							var friends = result["friends"];
-          							//alert(JSON.stringify(result["friends"]));          							
-                        			for (var i = 0; i < friends.length-1; i++) {
-                            			var html = "<li><a href='#'><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
-                            			list.append(html);
-                        			}
-                        			$('#friendsList').listview("refresh");
-                        		}
+          								var friends = result["friends"];
+          								//alert(JSON.stringify(result["friends"]));          							
+                        				for (var i = 0; i < friends.length-1; i++) {
+                            				var html = "<li><a href='#friendLists' fbId="+friends[i].id+"><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
+                            				list.append(html);
+                        					}
+                        				$('#friendsList').listview("refresh");
+                        				$.mobile.hidePageLoadingMsg();
+                        				}
                         			
          						 }
 						});
 
                 	}
-                	
-                    $.mobile.hidePageLoadingMsg();
                 });
             }
             
