@@ -24,3 +24,26 @@ var id = 1;
 }
 
 
+function OpenList(id)
+{
+
+var dir = host + "ayax/getList.php?id="+id;
+  					//alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+  							var list = $( "#ListsInfo" ).find( "#owns" );
+							list.empty();
+							list.append(msg);
+							$('#owns').listview("refresh");
+						});
+
+
+
+}
+
+

@@ -40,6 +40,7 @@
     <script type="text/javascript" src="js/fb.js"></script>
 	<script src="jquery.mobile-1.0.1.min.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/lista.js"></script>
   </head>
   <body onload="onBodyLoad()">
   <div id="menu" class="ui-body ui-body-a">
@@ -119,6 +120,8 @@
     </div><!-- /content -->
 </div><!-- /page one -->
 
+
+
 <div data-role="page" id="ownLists">
 
     <div data-role="header" data-id="lists" data-position="fixed">
@@ -146,7 +149,43 @@
     </div><!-- /footer -->
 </div><!-- /page one -->
 
-<!-- Start of first page: #one -->
+
+
+
+<!-- pagina para desplegar info de las listas-->
+
+<div data-role="page" id="ListsInfo">
+
+    <div data-role="header" data-id="lists" data-position="fixed">
+        <h1>My Lists</h1>
+        <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <a href="#reproductor" class="menuBtn ui-btn-right">Now Playing</a>
+        <div data-role="navbar" class = "tabs">
+            <ul>
+                <li><a href="#" tab ="ownLists" class="ui-btn-active ui-state-persist">My Own</a></li>
+                <li><a href="#favoriteLists" data-transition="fade" tab ="favoriteLists">Favorites</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+    <div data-role="content" >  
+    <div class="content-primary">
+    	<p>&nbsp;</p>
+    <ul id="owns" data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+    </ul>
+    </div>
+    </div><!-- /content -->
+    
+    <div data-role="footer" data-position="fixed">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page one -->
+
+
+
+
+
+<!-- Pagina Listas Favoritas -->
 <div data-role="page" id="favoriteLists">
 
     <div data-role="header" data-id="lists" data-position="fixed">
@@ -237,6 +276,15 @@
 		<h4>Page Footer</h4>
 	</div><!-- /footer -->
 </div><!-- /page one -->
+
+
+
+
+
+
+
+
+<!--Div Reproductor-->
 
 
 <div id="bplayer">
