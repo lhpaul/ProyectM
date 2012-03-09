@@ -18,6 +18,7 @@ if(isset($_GET['q']))
 	echo '<li><a href="#ListsInfo" onclick="OpenList('.$objResult['id'].');" >'.$objResult["nombre"].'</a></li>';
 	}
 	
+	
 
 	}	
 	

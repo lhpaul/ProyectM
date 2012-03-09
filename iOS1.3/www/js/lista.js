@@ -43,7 +43,6 @@ var dir = host + "ayax/getList.php?id="+id;
 						});
 
 
-
 }
 
 
