@@ -158,12 +158,13 @@
 
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>My Lists</h1>
-        <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <a href="#" onclick="history.back();" class="back"></a>
         <a href="#reproductor" class="menuBtn ui-btn-right">Now Playing</a>
         <div data-role="navbar" class = "tabs">
             <ul>
-                <li><a href="#" tab ="ownLists" class="ui-btn-active ui-state-persist">My Own</a></li>
-                <li><a href="#favoriteLists" data-transition="fade" tab ="favoriteLists">Favorites</a></li>
+                <li><a href="#" data-transition="fade" tab ="favoriteLists">Edit</a></li>
+                <li><a href="#" data-transition="fade" tab ="favoriteLists">Play All</a></li>
+                <li><a href="#" data-transition="fade" tab ="favoriteLists">Remove</a></li>
             </ul>
         </div><!-- /navbar -->
     </div><!-- /header -->
@@ -181,6 +182,39 @@
     </div><!-- /footer -->
 </div><!-- /page one -->
 
+
+
+
+
+<!-- pagina para editar lista-->
+
+<div data-role="page" id="EditListsInfo">
+
+    <div data-role="header" data-id="lists" data-position="fixed">
+        <h1>My Lists</h1>
+        <a href="#" onclick="history.back();" class="back"></a>
+        <a href="#reproductor" class="menuBtn ui-btn-right">Now Playing</a>
+        <div data-role="navbar" class = "tabs">
+            <ul>
+                <li><a href="#" data-transition="fade" tab ="favoriteLists" class="ui-btn-active ui-state-persist" >Edit</a></li>
+                <li><a href="#" data-transition="fade" tab ="favoriteLists">Play All</a></li>
+                <li><a href="#" data-transition="fade" tab ="favoriteLists">Remove</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+    <div data-role="content" >  
+    <div class="content-primary">
+    	<p>&nbsp;</p>
+    <ul id="songlist" data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+    </ul>
+    </div>
+    </div><!-- /content -->
+    
+    <div data-role="footer" data-position="fixed">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page one -->
 
 
 
