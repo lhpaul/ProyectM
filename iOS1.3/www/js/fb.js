@@ -5,6 +5,9 @@
 
 var userId;
 var userFbId;
+var userFriends;
+var friendsReady = false;
+
 FB.Event.subscribe('auth.login', function(response) {
                 //alert('auth.login event');
             });
@@ -34,53 +37,10 @@ FB.Event.subscribe('auth.login', function(response) {
                 });
             }
             
-            function getFriends() {
-                FB.api('/me/friends',{ fields: 'name,id,picture' } ,function(response) {
-                	if (response.error) {
-                    	alert(JSON.stringify(response.error));
-                	} else {
-                        var list = $( "#friends" ).find( "#friendsList" );
-                        list.empty();
-                        
-                        var jsonObjects = response.data;
- 
-						jQuery.ajax({
-          						url: "ayax/getFriends.php",
-          						type: "POST",
-          						data: {friends: JSON.stringify(jsonObjects) },
-          						dataType: "json",
-          						beforeSend: function(x) {
-            						if (x && x.overrideMimeType)
-            						{
-              						x.overrideMimeType("application/j-son;charset=UTF-8");
-            						}
-          						},
-          						success: function(result) {
-          							if(result.error){
-          							alert(result.error);
-          							$.mobile.hidePageLoadingMsg();
-          							}
-          							else{
-          								var friends = result["friends"];
-          								//alert(JSON.stringify(result["friends"]));          							
-                        				for (var i = 0; i < friends.length-1; i++) {
-                            				var html = "<li><a href='#friendLists' fbId="+friends[i].id+"><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
-                            				list.append(html);
-                        					}
-                        				$('#friendsList').listview("refresh");
-                        				$.mobile.hidePageLoadingMsg();
-                        				}
-                        			
-         						 }
-						});
-
-                	}
-                });
-            }
             
             function logout() {
+            	changeMenuBack();
                 FB.logout(function(response) {
-                    changeMenuBack();
                     //alert('logged out');
                 });
             }
@@ -110,6 +70,7 @@ FB.Event.subscribe('auth.login', function(response) {
      								request.done(function(msg) {
   											userId = msg;
                 							changeOwnLists();
+                							getFriends();
 										});
 
 									request.fail(function(jqXHR, textStatus) {
@@ -126,7 +87,52 @@ FB.Event.subscribe('auth.login', function(response) {
                     { perms: "email" }
                 );
                 
-         
+            }
+            
+            function getFriends() {
+                FB.api('/me/friends',{ fields: 'name,id,picture' } ,function(response) {
+                	if (response.error) {
+                    	alert(JSON.stringify(response.error));
+                	} else {
+                        var list = $( "#friends" ).find( "#friendsList" );
+                        list.empty();
+                        
+                        var jsonObjects = response.data;
+                        userFriends = response.data;
+ 
+						jQuery.ajax({
+          						url: "ayax/getFriends.php",
+          						type: "POST",
+          						data: {friends: JSON.stringify(jsonObjects) },
+          						dataType: "json",
+          						beforeSend: function(x) {
+            						if (x && x.overrideMimeType)
+            						{
+              						x.overrideMimeType("application/j-son;charset=UTF-8");
+            						}
+          						},
+          						success: function(result) {
+          							if(result.error){
+          							alert(result.error);
+          							$.mobile.hidePageLoadingMsg();
+          							}
+          							else{
+          								var friends = result["friends"];
+          								//alert(JSON.stringify(result["friends"]));          							
+                        				for (var i = 0; i < friends.length-1; i++) {
+                            				var html = "<li><a href='#friendLists' fbId="+friends[i].id+"><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
+                            				list.append(html);
+                        					}
+                        				$('#friendsList').listview("refresh");
+                        				friendsReady = true;
+                        				$.mobile.hidePageLoadingMsg();
+                        				}
+                        			
+         						 }
+						});
+
+                	}
+                });
             }
 
             function changeMenu () {                
@@ -196,7 +202,7 @@ FB.Event.subscribe('auth.login', function(response) {
 
                 			var list = $( "#menu" ).find( "#menuList" );
                 			list.empty();
-                			var html = '<li><a href="#ownLists"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>My Lists</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Search</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#friends"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Friends</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Logout</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li>';
+                			var html = '<li><a href="#ownLists"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>My Lists</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Search</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#friends"class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Friends</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li><li><a href="#searchMusic" onClick="logout()" class="ui-btn ui-btn-up-a ui-btn-corner-all ui-btn-icon-right ui-shadow ui-btn-up-undefined"><span class="ui-btn-inner ui-btn-corner-all ui-corner-top ui-corner-bottom"><span>Logout</span><span class="ui-icon ui-icon-star ui-icon-shadow"></span></span></a></li>';
                 			list.append(html);
   							return;
 				});
