@@ -36,10 +36,10 @@ var dir = host + "ayax/getList.php?id="+id;
      					});
 
      				request.done(function(msg) {
-  							var list = $( "#ListsInfo" ).find( "#owns" );
+  							var list = $( "#ListsInfo" ).find( "#songlist" );
 							list.empty();
-							list.append(msg);
-							$('#owns').listview("refresh");
+							list.append(msg);							
+							$('#songlist').listview("refresh");
 						});
 
 
