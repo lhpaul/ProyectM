@@ -103,8 +103,8 @@ $(document).bind("mobileinit", function(){
 
 			$( '#ownLists' ).live( 'pageshow',function(event, ui)
 			{
-				$.mobile.showPageLoadingMsg();
 				if(userId){
+				$.mobile.showPageLoadingMsg();
 				changeOwnLists();
 				}
 			});
@@ -203,19 +203,14 @@ $(document).bind("mobileinit", function(){
 
 			$( '#friends' ).live( 'pageshow',function(event, ui)
 			{
-				//alert(this.getAttribute("status"));
+				//alert(friendsReady);
 				if(this.getAttribute("status"))
 				{
-					if(!friendsReady)
+				if(!friendsReady)
 				$.mobile.showPageLoadingMsg();
-  				//getFriends();
-  				//printFriends();
   				this.removeAttribute("status");
-				//$.mobile.loadPage("ownLists.html");
-				//$.mobile.hidePageLoadingMsg();
-			}
+  				}
 
-			//alert(this.getAttribute("status"));
 
 			});
 			

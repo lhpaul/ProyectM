@@ -1,12 +1,13 @@
-/*if (typeof PhoneGap == 'undefined') alert('PhoneGap variable does not exist. Check that you have included phonegap.js correctly');
-            if (typeof PG == 'undefined') alert('PG variable does not exist. Check that you have included pg-plugin-fb-connect.js correctly');
-            if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
-*/
+//if (typeof PhoneGap == 'undefined') alert('PhoneGap variable does not exist. Check that you have included phonegap.js correctly');
+            //if (typeof PG == 'undefined') alert('PG variable does not exist. Check that you have included pg-plugin-fb-connect.js correctly');
+            //if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
+
 
 var userId;
 var userFbId;
 var userFriends;
 var friendsReady = false;
+
 
 FB.Event.subscribe('auth.login', function(response) {
                 //alert('auth.login event');
@@ -53,37 +54,7 @@ FB.Event.subscribe('auth.login', function(response) {
                 FB.login(
                     function(response) {
                         if (response.session) {
-                            changeMenu();
-                            $.mobile.changePage( "#ownLists", { transition: "slide"} );
-                            
-                         	FB.api('/me', function(response)
-            				{
-            					if (response.error) {
-                    				alert(JSON.stringify(response.error));
-                    				return false;
-                				} else
-                				{
-                					userFbId = response.id;
-                					var dir = "ayax/getUserIdFB.php?id="+ response.id;
-  									//alert(dir);
-									var request = $.ajax({
-      									type: "GET",
-      									url: dir,
-	  									cache: false,
-     									});
-     								request.done(function(msg) {
-  											userId = msg;
-                							changeOwnLists();
-                							getFriends();
-										});
-
-									request.fail(function(jqXHR, textStatus) {
-  											alert( "Request failed: " + textStatus );
-										});
-										//termino rquest
-                				}
-							});
-                            
+                        	cambiosDeLogeo(); 
                         } else {
                             alert('not logged in');
                         }
@@ -127,8 +98,8 @@ FB.Event.subscribe('auth.login', function(response) {
                             				var html = "<li><a href='#friendLists' fbId="+friends[i].id+"><img src=\"" + friends[i].picture + "\" /><h3>"+friends[i].name+"</h3></a></li>";
                             				list.append(html);
                         					}
-                        				$('#friendsList').listview("refresh");
                         				friendsReady = true;
+                        				$('#friendsList').listview("refresh");
                         				$.mobile.hidePageLoadingMsg();
                         				}
                         			
@@ -139,14 +110,6 @@ FB.Event.subscribe('auth.login', function(response) {
                 });
             }
 
-            function changeMenu () {                
-               
-                ChangeFacebookName();                
-
-                //$.mobile.loadPage( "ownLists.html" );
-                //$.mobile.loadPage( "friends.html" );
-                return true;
-            }
             function changeMenuBack () {
                 var list = $( "#menu" ).find( "#memberDetails" );
                 list.empty();
@@ -195,7 +158,7 @@ FB.Event.subscribe('auth.login', function(response) {
         }
         
         
-        function ChangeFacebookName() 	{
+        function changeMenu() 	{
 			FB.api('/me', function(response) { 
 
 			var list = $( "#menu" ).find( "#memberDetails" );
@@ -211,4 +174,39 @@ FB.Event.subscribe('auth.login', function(response) {
   							return;
 				});
 				}
+				
+		function cambiosDeLogeo()
+		{
+			changeMenu();
+            $.mobile.changePage( "#ownLists", { transition: "slide"} );
+                            
+                         	FB.api('/me', function(response)
+            				{
+            					if (response.error) {
+            						alert("llega");
+                    				alert(JSON.stringify(response.error));
+                    				return false;
+                				} else
+                				{
+                					userFbId = response.id;
+                					var dir = "ayax/getUserIdFB.php?id="+ response.id;
+  									//alert(dir);
+									var request = $.ajax({
+      									type: "GET",
+      									url: dir,
+	  									cache: false,
+     									});
+     								request.done(function(msg) {
+  											userId = msg;
+                							changeOwnLists();
+                							getFriends();
+										});
+
+									request.fail(function(jqXHR, textStatus) {
+  											alert( "Request failed: " + textStatus );
+										});
+										//termino rquest
+                				}
+							});
+		}
 

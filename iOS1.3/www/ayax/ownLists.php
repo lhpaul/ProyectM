@@ -15,8 +15,9 @@ if(isset($_GET['q']))
 	
 	while($objResult = mysql_fetch_array($objQuery))
 	{
-	echo '<li><a href="#" >'.$objResult["nombre"].'</a></li>';
+	echo '<li><a href="#ListsInfo" listId="'.$objResult['id'].'" >'.$objResult["nombre"].'</a></li>';
 	}
+	
 	
 
 	}	
