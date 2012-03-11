@@ -294,7 +294,7 @@
 <!--pagina reproductor -->
 <div data-role="page" id="reproductor">
 
-	<div data-role="header" data-id="searchHead">
+	<div data-role="header" data-id="searchHead" data-position="fixed">
 		<h1>Player</h1>
 		<a href="#" onclick="history.back();  document.getElementById('bplayer').style.left = '-2000px';" class="back"></a>
 	
@@ -318,7 +318,7 @@
 <!-- Pagina que aparece cuando se apreta click en una cancion -->
 <div data-role="page" id="songinfo">
 
-	<div data-role="header" data-id="lists">
+	<div data-role="header" data-position="fixed">
 		<h1>Song Info</h1>
 		<a href="#" onclick="history.back();" class="back"></a>
 		
@@ -326,7 +326,7 @@
 
 	<div data-role="content" >	
 	<div class="content-primary">
-	<ul id="song" data-role="listview" data-filter="false" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+	<ul id="song" data-role="listview">
 	</ul>
 	</div>
 	</div><!-- /content -->
@@ -335,16 +335,26 @@
 	</div><!-- /footer -->
 </div><!-- /page one -->
 
+<!-- Pagina para agregar canciones a las listas -->
+<div data-role="page" id="addSong" songId="">
 
+	<div data-role="header" data-position="fixed">
+		<h1>Add to List</h1>		
+	</div><!-- /header -->
 
-
-
-
+	<div data-role="content" >	
+	<div class="content-primary">
+	<ul id="addToList" data-role="listview">
+	</ul>
+	</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-theme="d">
+		<a href="#" onclick="history.back();" data-role="button">Cancel</a>
+	</div><!-- /footer -->
+</div><!-- end page -->
 
 
 <!--Div Reproductor-->
-
-
 <div id="bplayer">
 	<div id="jp_container_N" class="jp-video jp-video-270p">
 			<div class="jp-type-playlist">

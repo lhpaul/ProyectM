@@ -58,7 +58,7 @@ var myPlaylist;$(document).ready(function(){
 	$.mobile.showPageLoadingMsg(); 
 	var list = $( "#songinfo" ).find( "#song" );
 	list.empty();
-	var html = '<li><a href="#reproductor" onclick="addAndPlay('+id+');" >Play</a></li> <li><a href="#reproductor" onclick="addToPlaylist('+id+');" >Add to List</a></li>';
+	var html = '<li><a href="#reproductor" onclick="addAndPlay('+id+');" >Play</a></li> <li><a href="#addSong" data-transition="slideup" onclick="changeSongId('+id+');" >Add to List</a></li>';
 	list.append(html);
 	$('#song').listview("refresh");
 	$.mobile.hidePageLoadingMsg();

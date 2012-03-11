@@ -203,13 +203,13 @@ $(document).bind("mobileinit", function(){
 
 			$( '#friends' ).live( 'pageshow',function(event, ui)
 			{
-				//alert(friendsReady);
+				/*alert(friendsReady);
 				if(this.getAttribute("status"))
 				{
-				if(!friendsReady)
-				$.mobile.showPageLoadingMsg();
   				this.removeAttribute("status");
-  				}
+  				}*/
+  				if(!friendsReady)
+				$.mobile.showPageLoadingMsg();
 
 
 			});
