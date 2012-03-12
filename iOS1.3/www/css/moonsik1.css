@@ -81,98 +81,19 @@ strong { font-style: bold; }
 
 /*configuracion player */
 
-
-
 #bplayer {
 
 
 position:absolute;
 left:-3000px;
-top:70%;
+top:16%;
 width:100%;
 height:30%;
 
 
-
-
-}
-
-.jp-playlist ul{	
-overflow-x:hidden;
-white-space:nowrap; 
-list-style: none;
-
-	
-}
-.jp-controls
-{
-	
-list-style-image: none;	
-list-style: none;
-	
-}
-
-.jp-toggles
-{
-	
-list-style-image: none;	
-list-style: none;
-
-}
-
-
-.jp-playlist {
-
-position:absolute;
-left:0px;
-top:-160%;
-width:100%;
-
-}
-
-
-
-a.jp-previous {text-decoration:none; width:35px; height:40px; text-indent:-50000em; background:url(../images/previous.png) no-repeat center; display:block;  float:left;}
-a.jp-next {text-decoration:none; width:35px; height:40px; text-indent:-50000em; background:url(../images/next.png) no-repeat center; display:block; text-align:center; top:0px; float:left; margin-left: 10px; margin-top:5px;}
-
-a.jp-play {text-decoration:none; width:44px; height:50px; text-indent:-50000em; background:url(../images/play.png) no-repeat center; display:block; text-align:center;   float:left; margin-left: 10px; margin-top:0px;}
-a.jp-pause {text-decoration:none; width:44px; height:50px; text-indent:-50000em; background:url(../images/pause.png) no-repeat center; display:block; text-align:center;  float:left; margin-left: 10px; margin-top:0px;}
-
-.jp-controls li {
-display:inline; 
-	
-}
-
-a.jp-stop { visibility:hidden;
-
-}
-
-
-a.jp-mute { visibility:hidden;
-
-}
-
-
-a.jp-volume-max { visibility:hidden;
-
-}
-
-
-a.jp-shuffle { visibility:hidden;
-
-}
-
-a.jp-repeat { visibility:hidden;
-
-}
-
-
-a.jp-full-screen { visibility:hidden;
-
 }
 
 a.back {text-decoration:none; width:43px; height:30px; text-indent:-50000em; background:url(../images/backButton.png) no-repeat center; display:block; text-align:center;}
-
 
 
 
