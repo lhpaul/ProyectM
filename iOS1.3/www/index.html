@@ -4,6 +4,7 @@
   <title></title>
   
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta charset="utf-8">
 
     <script type="text/javascript">
@@ -172,7 +173,7 @@
     <div data-role="content" >  
     <div class="content-primary">
     	<div data-role="controlgroup" data-type="horizontal">
-        	<a href="#" data-role="button" data-inline="false">Play All</a>
+        	<a href="#reproductor" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
         	<a href="#" data-role="button" data-inline="false">Edit</a>
         	<a href="#" data-role="button" data-inline="false">Clear</a>
         </div>

@@ -7,7 +7,7 @@ var myPlaylist;$(document).ready(function(){
 	mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3"
 	}	], 
 	{		playlistOptions: {
-	enableRemoveControls: true		},	
+	enableRemoveControls: false		},	
 	swfPath: "js",		supplied: "mp3"	});	
 
 	});		
@@ -63,3 +63,6 @@ var myPlaylist;$(document).ready(function(){
 	$('#song').listview("refresh");
 	$.mobile.hidePageLoadingMsg();
 	}	
+	
+	
+	

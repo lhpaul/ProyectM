@@ -131,8 +131,24 @@ function editList()
 	
 }
 
-function playAll()
+function playAll(id)
 {
+
+
+var dir = host+ "ayax/playAll.php?id="+id; 
+	/*alert(dir); */				
+	$.ajax({ type: "GET", url: dir,	cache: false,success: function(html) {
+	if(html){	
+	cancion = html;		
+	eval(cancion);
+	document.getElementById("bplayer").style.left = "0px";
+	}
+	
+	else
+	alert('Sorry, unexpected error. Please try again later.');
+	}     					
+	});
+
 	
 }
 

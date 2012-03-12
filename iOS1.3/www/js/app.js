@@ -98,6 +98,12 @@ $(document).bind("mobileinit", function(){
 			});*/
 
 			
+		//cuando se apreta el reproductor
+		$( '#reproductor' ).live( 'pageshow',function(event, ui)
+			{
+			document.getElementById('bplayer').style.left = '0px';
+			});
+
 
 
 
