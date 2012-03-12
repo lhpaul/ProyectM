@@ -93,7 +93,12 @@ height:30%;
 
 }
 
-a.back {text-decoration:none; width:43px; height:30px; text-indent:-50000em; background:url(../images/backButton.png) no-repeat center; display:block; text-align:center;}
+a.back {text-decoration:none; width:27px; height:27px; text-indent:-50000em; background:url(../images/backButton.png) no-repeat center; display:block; text-align:center; border:0px;
+
+}
 
 
+a.nplayingbtn {text-decoration:none; width:27px; height:27px; text-indent:-50000em; background:url(../images/playerBtn.png) no-repeat center; display:block; text-align:center; border:0px;
 
+	
+}

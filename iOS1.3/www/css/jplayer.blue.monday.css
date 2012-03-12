@@ -615,4 +615,20 @@ a.jp-shuffle-off:hover {
 	font-weight:bold;
 }
 
+
+a.jp-mute { visibility:hidden;
+
+}
+
+
+a.jp-volume-max { visibility:hidden;
+
+}
+
+.jp-volume-bar {
+	
+	visibility:hidden;
+	
+}
+
 /* @end */
