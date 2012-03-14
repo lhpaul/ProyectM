@@ -149,7 +149,12 @@
     <div data-role="content" >  
     <div class="content-primary">
     	<p>&nbsp;</p>
-    <ul id="owns" data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+    	<div data-role="controlgroup" id="ownListOptions" data-type="horizontal">
+        	<a href="#" data-theme="a" onclick="editOwnLists()" data-role="button" data-inline="false">Edit</a>
+        	<a href="#" data-theme="a" onclick="addNewList()" data-role="button" data-inline="false">Add New List</a>
+        </div>
+        <a href="#" id="doneBtn2" data-theme="a" data-role="button" data-icon="check">Done</a>
+    <ul id="owns" data-role="listview">
     </ul>
     </div>
     </div><!-- /content -->
@@ -175,14 +180,15 @@
     <div data-role="content" >  
     <div class="content-primary">
     	<div data-role="controlgroup" id="editableList" data-type="horizontal">
-        	<a href="#reproductor" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
-        	<a href="#" onclick="editList(this);" data-role="button" data-inline="false">Edit</a>
-        	<a href="#" data-role="button" data-inline="false">Clear</a>
+        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
+        	<a href="#" data-theme="a" onclick="editList(this);" data-role="button" data-inline="false">Edit</a>
+        	<a href="#" data-theme="a" data-role="button" data-inline="false">Clear</a>
         </div>
-        <div data-role="controlgroup" id="notEditableList" data-type="horizontal">
-        	<a href="#reproductor" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
-        	<a href="#" data-role="button" data-inline="false">Add To Favorites</a>
+        <div data-role="controlgroup" data-theme="a" id="notEditableList" data-type="horizontal">
+        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
+        	<a href="#" data-theme="a" data-role="button" data-inline="false">Add To Favorites</a>
         </div>
+        <a href="#" id="doneBtn" data-theme="a" data-role="button" data-icon="check">Done</a>
     <ul id="songlist" data-role="listview">
     </ul>
     </div>

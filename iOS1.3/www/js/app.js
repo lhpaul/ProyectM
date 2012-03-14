@@ -109,6 +109,16 @@ $(document).bind("mobileinit", function(){
   						}else
   						changeOwnLists();
 				}
+				
+				var options = document.getElementById('ownListOptions');
+				options.style.visibility = 'visible';
+				options.style.height = '';
+				options.style.margin = ".5em 0 1em";
+				
+				options = document.getElementById('doneBtn2');
+				options.style.visibility = 'hidden';
+				options.style.height = '0px';
+				options.style.margin = ".5em 0 0em";
 			});
 
 

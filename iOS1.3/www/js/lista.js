@@ -7,13 +7,15 @@ $("#ownLists li a").live("click", function (event) {
                 title.empty();
                 title.append(this.innerHTML);
                 
-				document.getElementById('editableList').style.visibility = 'visible';
-				document.getElementById('editableList').style.height = '';
-				document.getElementById('editableList').style.margin = ".5em 0 1em";
+				var options = document.getElementById('editableList');
+				options.style.visibility = 'visible';
+				options.style.height = '';
+				options.style.margin = ".5em 0 1em";
 				
-				document.getElementById('notEditableList').style.visibility = 'hidden';
-				document.getElementById('notEditableList').style.height = '0px';
-				document.getElementById('notEditableList').style.margin = ".5em 0 0em";
+				options = document.getElementById('notEditableList');
+				options.style.visibility = 'hidden';
+				options.style.height = '0px';
+				options.style.margin = ".5em 0 0em";
 				
 				return true;
 
@@ -26,13 +28,16 @@ $("#friendLists li a").live("click", function (event) {
 				var title = $( "#ListsInfo" ).find( "#headerTitle" );
                 title.empty();
                 title.append(this.innerHTML);
-				document.getElementById('notEditableList').style.visibility = 'visible';
-				document.getElementById('notEditableList').style.height = '';
-				document.getElementById('notEditableList').style.margin = ".5em 0 1em";
+                
+                var options = document.getElementById('notEditableList');
+				options.style.visibility = 'visible';
+				options.style.height = '';
+				options.style.margin = ".5em 0 1em";
 				
-				document.getElementById('editableList').style.visibility = 'hidden';
-				document.getElementById('editableList').style.height = '0px';
-				document.getElementById('editableList').style.margin = ".5em 0 0em";
+				options = document.getElementById('editableList');
+				options.style.visibility = 'hidden';
+				options.style.height = '0px';
+				options.style.margin = ".5em 0 0em";
 				return true;
 
 			});
@@ -110,6 +115,9 @@ $( '#ListsInfo' ).live( 'pagebeforeshow',function(event, ui)
 				
 			var list = $( "#ListsInfo" ).find( "#songlist" );
 			list.empty();
+			var doneBtn = document.getElementById("doneBtn");
+			doneBtn.style.visibility = "hidden";
+			doneBtn.style.height = "0px";
 			
 			});
 
@@ -172,20 +180,31 @@ function changeSongId(id)
 
 function editList(btn)
 {
-	alert("llega");
+	//alert("llega");
 	
-	btn.getElementsByTagName("span")[1].innerHTML = "Done";
-	btn.setAttribute("onClick", "editReady(this)");
+	//btn.getElementsByTagName("span")[1].innerHTML = "Done";
+	//btn.setAttribute("onClick", "editReady(this)");
+	var doneBtn = document.getElementById("doneBtn");
+	doneBtn.style.visibility = "visible";
+	doneBtn.style.height = "38px";
+	doneBtn.setAttribute("onClick", "editReady(this)");
+	
+	var options = document.getElementById('editableList');
+	options.style.visibility = 'hidden';
+	options.style.height = '0px';
+	options.style.margin = ".5em 0 0em";
+	
 	
 	$('#songlist li a').each(function() {
 		var songId = this.getAttribute('songId');
 		this.setAttribute("href", "#"); 
-		this.setAttribute("onClick", "alert("+songId+");");
+		this.setAttribute("onClick", "return false;");
 		//var icon = this.parentNode.parentNode.getElementsByTagName("span")[0];
 		//this.parentNode.parentNode.removeChild(icon);
 		var del = document.createElement("a");
 		del.setAttribute('id', 'delBtn');
 		del.setAttribute('class', 'ui-li-link-alt ui-btn ui-btn-up-c ui-corner-tr');
+		del.setAttribute('onClick', 'deleteSong('+songId+')');
 		del.innerHTML ='<span class="ui-btn-inner ui-corner-tr"><span class="ui-btn-text ui-corner-tr"></span><span title="" class="ui-btn ui-btn-icon-notext ui-btn-corner-all ui-shadow ui-btn-up-b"><span class="ui-btn-inner ui-btn-corner-all ui-corner-tr"><span class="ui-btn-text ui-corner-tr"></span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></span></span>';
 		this.parentNode.parentNode.parentNode.appendChild(del);
 		})
@@ -201,10 +220,19 @@ function editList(btn)
 
 function editReady(btn)
 {
-	alert("ready");
+	//alert("ready");
 	
-	btn.getElementsByTagName("span")[1].innerHTML = "Edit";
-	btn.setAttribute("onClick", "editList(this)");
+	var doneBtn = document.getElementById("doneBtn");
+	doneBtn.style.visibility = "hidden";
+	doneBtn.style.height = "0px";
+	
+	var options = document.getElementById('editableList');
+	options.style.visibility = 'visible';
+	options.style.height = '';
+	options.style.margin = ".5em 0 1em";
+	
+	//btn.getElementsByTagName("span")[1].innerHTML = "Edit";
+	//btn.setAttribute("onClick", "editList(this)");
 	
 	$('#songlist li a').each(function() {
 		this.setAttribute("href", "#songinfo"); 
@@ -238,7 +266,60 @@ var dir = host+ "ayax/playAll.php?id="+id;
 	
 }
 
+function deleteSong(songId)
+{
+	$.mobile.showPageLoadingMsg();
+	var listId = document.getElementById('ListsInfo').getAttribute("listId");
+	//alert(songId+" "+listId);
+	
+	var dir = host + "ayax/deleteSong.php?songId="+songId+"&listId="+listId;
+  					//alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+     					//alert(msg);
+     					$('#songlist li a').each(function() {
+     						if(this.getAttribute('songId') == songId)
+     						{
+     							this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+     							$('#songlist').listview("refresh");
+     							$.mobile.hidePageLoadingMsg();
+     							return false;
+     						}
+     					})
+						});
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
+						});
+	
+	return false;
+}
+
 function clearList()
+{
+	
+}
+
+function editOwnLists()
+{
+	var options = document.getElementById('doneBtn2');
+	options.style.visibility = 'visible';
+	options.style.height = '';
+	options.style.margin = ".5em 0 1em";
+				
+	options = document.getElementById('ownListOptions');
+	options.style.visibility = 'hidden';
+	options.style.height = '0px';
+	options.style.margin = ".5em 0 0em";
+}
+
+function addNewList()
 {
 	
 }
