@@ -180,10 +180,6 @@ function changeSongId(id)
 
 function editList(btn)
 {
-	//alert("llega");
-	
-	//btn.getElementsByTagName("span")[1].innerHTML = "Done";
-	//btn.setAttribute("onClick", "editReady(this)");
 	var doneBtn = document.getElementById("doneBtn");
 	doneBtn.style.visibility = "visible";
 	doneBtn.style.height = "38px";
@@ -209,8 +205,6 @@ function editList(btn)
 		this.parentNode.parentNode.parentNode.appendChild(del);
 		})
 		
-		//alert($( "#songlist li").length);
-		//list.append('<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>');
 		$('#songlist').listview("refresh");
 		
 		
@@ -231,8 +225,6 @@ function editReady(btn)
 	options.style.height = '';
 	options.style.margin = ".5em 0 1em";
 	
-	//btn.getElementsByTagName("span")[1].innerHTML = "Edit";
-	//btn.setAttribute("onClick", "editList(this)");
 	
 	$('#songlist li a').each(function() {
 		this.setAttribute("href", "#songinfo"); 
@@ -317,11 +309,53 @@ function editOwnLists()
 	options.style.visibility = 'hidden';
 	options.style.height = '0px';
 	options.style.margin = ".5em 0 0em";
+	
+	$('#owns li a').each(function() {
+		var listId = this.getAttribute('listId');
+		this.setAttribute("href", "#"); 
+		this.setAttribute("onClick", "return false;");
+		var del = document.createElement("a");
+		del.setAttribute('id', 'delBtn');
+		del.setAttribute('class', 'ui-li-link-alt ui-btn ui-btn-up-c ui-corner-tr');
+		del.setAttribute('onClick', 'deleteList('+listId+')');
+		del.innerHTML ='<span class="ui-btn-inner ui-corner-tr"><span class="ui-btn-text ui-corner-tr"></span><span title="" class="ui-btn ui-btn-icon-notext ui-btn-corner-all ui-shadow ui-btn-up-b"><span class="ui-btn-inner ui-btn-corner-all ui-corner-tr"><span class="ui-btn-text ui-corner-tr"></span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></span></span>';
+		this.parentNode.parentNode.parentNode.appendChild(del);
+		})
+		
+		$('#owns').listview("refresh");
+}
+
+function editOwnListsReady()
+{
+	var doneBtn = document.getElementById("doneBtn2");
+	doneBtn.style.visibility = "hidden";
+	doneBtn.style.height = "0px";
+	
+	var options = document.getElementById('ownListOptions');
+	options.style.visibility = 'visible';
+	options.style.height = '';
+	options.style.margin = ".5em 0 1em";
+	
+	
+	$('#owns li a').each(function() {
+		this.setAttribute("href", "#ListsInfo"); 
+		})
+		$('#owns li #delBtn').each(function() {
+			this.parentNode.removeChild(this);
+		})
+		$('#owns').listview("refresh");
 }
 
 function addNewList()
 {
 	
 }
+
+function deleteList(listId)
+{
+	alert(listId);
+}
+
+
 
 
