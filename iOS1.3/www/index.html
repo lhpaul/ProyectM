@@ -3,12 +3,11 @@
   <head>
   <title></title>
   
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta charset="utf-8">
 
     <script type="text/javascript">
-
 	
 	function onBodyLoad()
 	{
@@ -29,6 +28,7 @@
 
     <link rel="stylesheet" href="jquery.mobile-1.0.1.min.css" />
     <link rel="stylesheet" href="css/moonsik1.css" />
+    <link rel="stylesheet" href="css/jplayer.blue.monday.css" />
 	<script src="jquery.js"></script>
 
     <!-- phonegap facebook plugin -->
@@ -79,6 +79,7 @@
     <div data-role="header" data-id="searchHead" data-position="fixed">
         <h1>Search</h1>
         <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
         <div data-role="navbar" class = "tabs">
             <ul>
                 <li><a href="#" data-transition="fade" tab ="music" class="ui-btn-active ui-state-persist">Music</a></li>
@@ -107,6 +108,7 @@
     <div data-role="header" data-id="searchHead" data-position="fixed">
         <h1>Search</h1>
         <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
         <div data-role="navbar" class = "tabs">
             <ul>
                 <li><a href="#searchMusic" data-transition="fade" tab ="music">Music</a></li>
@@ -135,7 +137,7 @@
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>My Lists</h1>
         <a href="#" class="showMenu menuBtn ui-btn-left"></a>
-        <a href="#reproductor" class="menuBtn ui-btn-right">Now Playing</a>
+       <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
         <div data-role="navbar" class = "tabs">
             <ul>
                 <li><a href="#" tab ="ownLists" class="ui-btn-active ui-state-persist">My Own</a></li>
@@ -167,7 +169,7 @@
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1 id ="headerTitle">My Lists</h1>
         <a href="#" onclick="history.back();" class="back"></a>
-        <a href="#reproductor" class="menuBtn ui-btn-right">Now Playing</a>
+        <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
     </div><!-- /header -->
 
     <div data-role="content" >  
@@ -202,8 +204,8 @@
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>My Lists</h1>
         <a href="#" onclick="history.back();" class="back"></a>
-        <a href="#reproductor" class="menuBtn ui-btn-right">Now Playing</a>
-        <div data-role="navbar" class = "tabs">
+        <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
+                <div data-role="navbar" class = "tabs">
             <ul>
                 <li><a href="#" data-transition="fade" tab ="favoriteLists" class="ui-btn-active ui-state-persist" >Edit</a></li>
                 <li><a href="#" data-transition="fade" tab ="favoriteLists">Play All</a></li>
@@ -234,6 +236,7 @@
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>My Lists</h1>
         <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
         <div data-role="navbar" class = "tabs">
             <ul>
                 <li><a href="#ownLists" tab ="ownLists" data-transition="fade">My Own</a></li>
@@ -261,6 +264,7 @@
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>Friends</h1>
         <a href="#" class="showMenu menuBtn ui-btn-left"></a>
+        <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
     </div><!-- /header -->
 
     <div data-role="content" >  
@@ -281,6 +285,7 @@
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>Friend Lists</h1>
         <a href="#" onclick="history.back();" class="back"></a>
+        <a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
     </div><!-- /header -->
 
     <div data-role="content" >  
@@ -326,6 +331,7 @@
 	<div data-role="header" data-position="fixed">
 		<h1>Song Info</h1>
 		<a href="#" onclick="history.back();" class="back"></a>
+		<a href="#reproductor" class="ui-btn-right nplayingbtn">Now Playing</a>
 		
 	</div><!-- /header -->
 
@@ -357,6 +363,7 @@
 		<a href="#" onclick="history.back();" data-role="button">Cancel</a>
 	</div><!-- /footer -->
 </div><!-- end page -->
+
 
 
 <!--Div Reproductor-->
@@ -418,7 +425,6 @@
 			</div>
 		</div>
 </div>
-
 
 
 </body>
