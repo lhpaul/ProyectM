@@ -61,7 +61,7 @@ FB.Event.subscribe('auth.login', function(response) {
                     },
                     { perms: "email" }
                 );
-                
+                return false;
             }
             
             function getFriends() {
@@ -179,11 +179,12 @@ FB.Event.subscribe('auth.login', function(response) {
 		{
 			changeMenu();
             $.mobile.changePage( "#ownLists", { transition: "slide"} );
+            $.mobile.showPageLoadingMsg();
                             
                          	FB.api('/me', function(response)
             				{
             					if (response.error) {
-            						alert("llega");
+            						//alert("llega");
                     				alert(JSON.stringify(response.error));
                     				return false;
                 				} else

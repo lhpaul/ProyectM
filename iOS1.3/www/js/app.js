@@ -90,13 +90,6 @@ $(document).bind("mobileinit", function(){
 
 			});
 
-			/*$("#ownLists .tabs li a, #favoriteLists .tabs li a").live("click", function (event) {
-				alert(this.getAttribute("tab"));
-				$.mobile.loadPage(this.getAttribute("tab")+".html");
-				return true;
-
-			});*/
-
 			
 		//cuando se apreta el reproductor
 		$( '#reproductor' ).live( 'pageshow',function(event, ui)
@@ -110,22 +103,34 @@ $(document).bind("mobileinit", function(){
 			$( '#ownLists' ).live( 'pageshow',function(event, ui)
 			{
 				if(userId){
-				$.mobile.showPageLoadingMsg();
-				changeOwnLists();
+					if(this.getAttribute("status"))
+						{
+  							this.removeAttribute("status");
+  						}else
+  						changeOwnLists();
 				}
 			});
 
 
 
 			$( '#favoriteLists' ).live( 'pageshow',function(event, ui)
-			{	$.mobile.showPageLoadingMsg();
+			{	
+				if(this.getAttribute("status"))
+						{
+							
+				$.mobile.showPageLoadingMsg();
   				var list = $( "#favoriteLists" ).find( "#favorites" );
 				list.empty();
-				var html = '<li><a href="acura.html">Acura</a></li> <li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
+				var html = '<li><a href="acura.html">Acura</a><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a></li><li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
 				list.append(html);
 				$('#favorites').listview("refresh");
 				//$.mobile.loadPage("ownLists.html");
 				$.mobile.hidePageLoadingMsg();
+							
+  							this.removeAttribute("status");
+  							//$.mobile.showPageLoadingMsg();
+  						}
+  						$.mobile.hidePageLoadingMsg();
 
 			});
 
@@ -220,13 +225,21 @@ $(document).bind("mobileinit", function(){
 
 			});
 			
+			
+			$( '#friendLists' ).live( 'pagebeforeshow',function(event, ui)
+			{
+				
+			var list = $( "#friendLists" ).find( "#flists" );
+			list.empty();
+			
+			});
+			
+			
 			$( '#friendLists' ).live( 'pageshow',function(event, ui)
 			{
 				
 			var id = this.getAttribute("fbId");
 			//alert(id);
-			var list = $( "#friendLists" ).find( "#flists" );
-			list.empty();
 			
 			$.mobile.showPageLoadingMsg();	
   					var dir = host + "ayax/getFriendLists.php?q="+id;
@@ -238,6 +251,7 @@ $(document).bind("mobileinit", function(){
      					});
 
      				request.done(function(msg) {
+     						var list = $( "#friendLists" ).find( "#flists" );
 							list.empty();
 							list.append(msg);
 							$('#flists').listview("refresh");

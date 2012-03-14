@@ -130,7 +130,7 @@
 
 
 
-<div data-role="page" id="ownLists">
+<div data-role="page" id="ownLists" status="notLoaded">
 
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>My Lists</h1>
@@ -172,10 +172,14 @@
 
     <div data-role="content" >  
     <div class="content-primary">
-    	<div data-role="controlgroup" data-type="horizontal">
+    	<div data-role="controlgroup" id="editableList" data-type="horizontal">
         	<a href="#reproductor" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
-        	<a href="#" data-role="button" data-inline="false">Edit</a>
+        	<a href="#" onclick="editList(this);" data-role="button" data-inline="false">Edit</a>
         	<a href="#" data-role="button" data-inline="false">Clear</a>
+        </div>
+        <div data-role="controlgroup" id="notEditableList" data-type="horizontal">
+        	<a href="#reproductor" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
+        	<a href="#" data-role="button" data-inline="false">Add To Favorites</a>
         </div>
     <ul id="songlist" data-role="listview">
     </ul>
@@ -225,7 +229,7 @@
 
 
 <!-- Pagina Listas Favoritas -->
-<div data-role="page" id="favoriteLists">
+<div data-role="page" id="favoriteLists" status="notLoaded">
 
     <div data-role="header" data-id="lists" data-position="fixed">
         <h1>My Lists</h1>

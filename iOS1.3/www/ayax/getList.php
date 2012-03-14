@@ -19,12 +19,12 @@ if(isset($_GET['id']))
 			
 		if($i == 0)
 		{
-		echo '<li id="valorlista" idlista="'.$_GET['id'].'"><a href="#songinfo" onclick="SongInfo('.$resultado['id_cancion'].');">'.$resultado2['filename'].'</a></li>';
+		echo '<li id="valorlista" idlista="'.$_GET['id'].'"><a href="#songinfo" songId="'.$resultado['id_cancion'].'" onclick="SongInfo('.$resultado['id_cancion'].');">'.$resultado2['filename'].'</a></li>';
 		}
 		
 		else
 		{
-		echo '<li><a href="#songinfo" onclick="SongInfo('.$resultado['id_cancion'].');">'.$resultado2['filename'].'</a></li>';
+		echo '<li><a href="#songinfo" songId="'.$resultado['id_cancion'].'" onclick="SongInfo('.$resultado['id_cancion'].');">'.$resultado2['filename'].'</a></li>';
 		}
 		$i++;
 
