@@ -149,9 +149,9 @@
     <div data-role="content" >  
     <div class="content-primary">
     	<p>&nbsp;</p>
-    	<div data-role="controlgroup" id="ownListOptions" data-type="horizontal">
+    	<div data-role="controlgroup" align="center" id="ownListOptions" data-type="horizontal">
         	<a href="#" data-theme="a" onclick="editOwnLists()" data-role="button" data-inline="false">Edit</a>
-        	<a href="#" data-theme="a" onclick="addNewList()" data-role="button" data-inline="false">Add New List</a>
+        	<a href="#addList" data-theme="a" onclick="return false;" href="#addList" data-transition="slideup" data-role="button" data-inline="false">Add New</a>
         </div>
         <a href="#" id="doneBtn2" onclick="editOwnListsReady()" data-theme="a" data-role="button" data-icon="check">Done</a>
     <ul id="owns" data-role="listview">
@@ -179,13 +179,13 @@
 
     <div data-role="content" >  
     <div class="content-primary">
-    	<div data-role="controlgroup" id="editableList" data-type="horizontal">
-        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
+    	<div data-role="controlgroup" id="editableList" align="center" data-type="horizontal">
+        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-mini="true">Play All</a>
         	<a href="#" data-theme="a" onclick="editList(this);" data-role="button" data-inline="false">Edit</a>
         	<a href="#" data-theme="a" data-role="button" data-inline="false">Clear</a>
         </div>
         <div data-role="controlgroup" data-theme="a" id="notEditableList" data-type="horizontal">
-        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-inline="false">Play All</a>
+        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button">Play All</a>
         	<a href="#" data-theme="a" data-role="button" data-inline="false">Add To Favorites</a>
         </div>
         <a href="#" id="doneBtn" data-theme="a" data-role="button" data-icon="check">Done</a>
@@ -367,6 +367,40 @@
 	</div><!-- /content -->
 	<div data-role="footer" data-theme="d">
 		<a href="#" onclick="history.back();" data-role="button">Cancel</a>
+	</div><!-- /footer -->
+</div><!-- end page -->
+
+<!-- Pagina para crear nuevas listas -->
+<div data-role="page" id="addList">
+
+	<div data-role="header" data-position="fixed">
+		<h1>New List</h1>		
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+	<div class="content-primary">
+	<form name="newListForm" action="#" method="get" data-mini="true">
+		<div data-role="fieldcontain">
+	         <label for="name">Name:</label>
+	         <input type="text" name="name" id="name" value=""  />
+			</div>
+			<div data-role="fieldcontain">
+			    <fieldset data-role="controlgroup" data-type="horizontal">
+			     	<legend>Privacy:</legend>
+			         	<input type="radio" name="privacy" id="radio-choice-c" value="1" checked="checked" />
+			         	<label for="radio-choice-c">Private</label>
+			         	<input type="radio" name="privacy" id="radio-choice-d" value="2" />
+			         	<label for="radio-choice-d">Friends</label>
+			         	<input type="radio" name="privacy" id="radio-choice-e" value="3" />
+			         	<label for="radio-choice-e">Public</label>
+			    </fieldset>
+			</div>
+	</form>
+	<div class="ui-block-a"><a href="#" onclick="addNewList();" data-role="button">Create</a></div>
+	<div class="ui-block-b"><a href="#" onclick="history.back();" data-role="button">Cancel</a></div>
+	</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-theme="d">
 	</div><!-- /footer -->
 </div><!-- end page -->
 

@@ -11,7 +11,6 @@ if(isset($_GET['songId']) && isset($_GET['listId']))
 		
 		$sql="INSERT INTO cancionLista(id_lista, id_cancion) VALUES ('$listId','$songId')";
 		$resultado=mysql_query($sql,$link);
-		echo $resultado;
 		mysql_close($link);
 
 		

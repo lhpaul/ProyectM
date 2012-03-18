@@ -348,7 +348,28 @@ function editOwnListsReady()
 
 function addNewList()
 {
-	
+	if(!validar(document.newListForm))
+	return false;
+	$.mobile.showPageLoadingMsg();	
+  					var dir = host + "ayax/newList.php?userId="+userId+"&"+getDataFromForm(document.newListForm);
+  					alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+     					alert(msg);
+							$.mobile.hidePageLoadingMsg();
+							history.back()
+						});
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
+  							history.back()
+						});
 }
 
 function deleteList(listId)
@@ -356,6 +377,28 @@ function deleteList(listId)
 	alert(listId);
 }
 
+function validar(which) {
+  for (i=0;i<which.length - 1;i++) {
+    if (!which.elements[i].value && which.elements[i].name){
+      return false;}
+  }
+  return true;
+}
 
+function getDataFromForm(which) {
+	var data = "";
+  for (i=0;i<which.length - 1;i++) {
+    if (which.elements[i].name == "privacy"){
+      if(which.elements[i].checked)
+      data += which.elements[i].name + '=' + which.elements[i].value + '&';
+      }
+      else
+      if(which.elements[i].name)
+      data += which.elements[i].name + '=' + which.elements[i].value + '&';
+  }
+  
+  return data;
+  
+}
 
 

@@ -10,8 +10,7 @@ if(isset($_GET['songId']) && isset($_GET['listId']))
 		$songId = $_GET['songId'];
 		
 		$sql="DELETE FROM cancionLista WHERE id_lista='$listId' AND id_cancion='$songId'";
-		echo $sql;
-		mysql_query($sql) or die(mysql_error()); 
+		mysql_query($sql) or die(mysql_error());
 		mysql_close($link);
 
 		
