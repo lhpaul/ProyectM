@@ -34,13 +34,6 @@ div.jp-audio {
 	width:100%;
 }
 
-div.jp-video-full {
-	/* Rules for IE6 (full-screen) */
-	width:480px;
-	height:270px;
-	/* Rules for IE7 (full-screen) - Otherwise the relative container causes other page items that are not position:static (default) to appear over the video/gui. */
-	position:static !important; position:relative
-}
 
 div.jp-video-full div.jp-jplayer {
 	top: 0;
@@ -73,52 +66,61 @@ div.jp-interface {
 }
 
 div.jp-audio div.jp-type-single div.jp-interface {
-	height:80px;
+	
 }
 div.jp-audio div.jp-type-playlist div.jp-interface {
-	height:80px;
+	
 }
 
 div.jp-video div.jp-interface {
 	border-top:1px solid #009be3;
+	position:relative;
 }
 
 /* @group CONTROLS */
 
 div.jp-controls-holder {
-	clear: both;
-	width:70%;
-	margin:0 auto;
-	position: relative;
-	overflow:hidden;
-	top:-8px; /* This negative value depends on the size of the text in jp-currentTime and jp-duration */
+
+position:fixed;
+bottom:0px;
+left:0px;
+background:black;
+width:100%;
+z-index:9999999999;
+text-align: center;
+height:50px;
+
 }
+
+#jp-controls-holder
+{
+	
+	visibility:hidden;
+	
+}
+
 
 div.jp-interface ul.jp-controls {
 	list-style-type:none;
-	margin:0;
-	padding: 0;
-	overflow:hidden;
+	overflow:hidden;	
+	text-align:center;
+
 }
 
-div.jp-audio ul.jp-controls {
-	width: 380px;
-	padding:20px 20px 0 20px;
-}
 
-div.jp-video div.jp-type-single ul.jp-controls {
-	width: 78px;
-	margin-left: 200px;
-}
 
 div.jp-video div.jp-type-playlist ul.jp-controls {
-	width: 100%;
-	margin-left: 10%;
+
+	margin:0px auto;	
+    text-align: left;
+    width:40%;
+    margin-left:25%;
 }
 div.jp-video ul.jp-controls,
 div.jp-interface ul.jp-controls li {
 	display:inline;
 	float: left;
+	margin-top:5px;
 }
 
 div.jp-interface ul.jp-controls a {
@@ -130,6 +132,9 @@ a.jp-play,
 a.jp-pause {
 	width:40px;
 	height:40px;
+	
+	
+
 }
 
 a.jp-play {
@@ -359,6 +364,7 @@ div.jp-playlist {
 	width:100%;
 	background-color:#ccc;
 	border-top:1px solid #009be3;
+	margin-top:20px;
 }
 div.jp-type-single div.jp-title,
 div.jp-type-playlist div.jp-title,
@@ -366,20 +372,10 @@ div.jp-type-single div.jp-playlist {
 	border-top:none;
 }
 div.jp-title ul,
-div.jp-playlist ul {
-	list-style-type:none;
-	margin:0;
-	padding:0 20px;
-	font-size:.72em;
-}
 
 div.jp-title li {
 	padding:5px 0;
 	font-weight:bold;
-}
-div.jp-playlist li {
-	padding:5px 0 4px 20px;
-	border-bottom:1px solid #eee;
 }
 
 div.jp-playlist li div {
@@ -515,8 +511,8 @@ ul.jp-toggles li a {
 }
 
 a.jp-full-screen {
-	background: url("jplayer.blue.monday.jpg") 0 -310px no-repeat;
-	margin-left: 20px;
+	
+	visibility:hidden;
 }
 
 a.jp-full-screen:hover {
@@ -534,6 +530,8 @@ a.jp-restore-screen:hover {
 
 a.jp-repeat {
 	background: url("jplayer.blue.monday.jpg") 0 -290px no-repeat;
+	visibility:hidden;
+
 }
 
 a.jp-repeat:hover {
@@ -551,6 +549,8 @@ a.jp-repeat-off:hover {
 a.jp-shuffle {
 	background: url("jplayer.blue.monday.jpg") 0 -270px no-repeat;
 	margin-left: 5px;
+	visibility:hidden;
+
 }
 
 a.jp-shuffle:hover {

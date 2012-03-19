@@ -312,7 +312,7 @@
 
 	<div data-role="header" data-id="searchHead" data-position="fixed">
 		<h1>Player</h1>
-		<a href="#" onclick="history.back();  document.getElementById('bplayer').style.left = '-2000px';" class="back"></a>
+		<a href="#" onclick="history.back(); hidePlayer();" class="back"></a>
 	
 	</div><!-- /header -->
 
@@ -421,7 +421,7 @@
 						</div>
 						<div class="jp-current-time"></div>
 						<div class="jp-duration"></div>
-						<div class="jp-controls-holder">
+						<div class="jp-controls-holder"  id="jp-controls-holder">
 							<ul class="jp-controls">
 								<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
 								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
@@ -458,6 +458,12 @@
 						<li></li>
 					</ul>
 				</div>
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />			
+
 				<div class="jp-no-solution">
 					<span>Update Required</span>
 					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
