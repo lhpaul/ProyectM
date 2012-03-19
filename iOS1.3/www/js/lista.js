@@ -235,6 +235,89 @@ function editReady(btn)
 		$('#songlist').listview("refresh");
 }
 
+function editFavoriteLists(btn)
+{
+	var options = document.getElementById('doneBtn3');
+	options.style.visibility = 'visible';
+	options.style.margin = ".5em 0 1em";
+	options.style.height = '';
+				
+	options = document.getElementById('editBtn3');
+	options.style.height = '0px';
+	options.style.margin = "0 0 0em";
+	options.style.visibility = 'hidden';
+	
+	$('#favorites li a').each(function() {
+		var listId = this.getAttribute('listId');
+		this.setAttribute("href", "#"); 
+		this.setAttribute("onClick", "return false;");
+		var del = document.createElement("a");
+		del.setAttribute('id', 'delBtn');
+		del.setAttribute('class', 'ui-li-link-alt ui-btn ui-btn-up-c ui-corner-tr');
+		del.setAttribute('onClick', 'deleteFavoriteList('+listId+')');
+		del.innerHTML ='<span class="ui-btn-inner ui-corner-tr"><span class="ui-btn-text ui-corner-tr"></span><span title="" class="ui-btn ui-btn-icon-notext ui-btn-corner-all ui-shadow ui-btn-up-b"><span class="ui-btn-inner ui-btn-corner-all ui-corner-tr"><span class="ui-btn-text ui-corner-tr"></span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></span></span>';
+		this.parentNode.parentNode.parentNode.appendChild(del);
+		})
+		
+		$('#favorites').listview("refresh");
+}
+
+function deleteFavoriteList(listId)
+{
+	$.mobile.showPageLoadingMsg();
+	
+	var dir = host + "ayax/deleteFavoriteList.php?userId="+userId+"&listId="+listId;
+  					//alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+     					//alert(msg);
+     					$('#favorites li a').each(function() {
+     						if(this.getAttribute('listId') == listId)
+     						{
+     							this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+     							$('#favorites').listview("refresh");
+     							$.mobile.hidePageLoadingMsg();
+     							return false;
+     						}
+     					})
+						});
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
+						});
+	
+	return false;
+}
+
+function editFavoriteListsReady(btn)
+{
+	var options = document.getElementById('editBtn3');
+	options.style.height = '';
+	options.style.margin = ".5em 0 1em";
+	options.style.visibility = 'visible';
+				
+	options = document.getElementById('doneBtn3');
+	options.style.height = '0px';
+	options.style.margin = "0 0 0";
+	options.style.visibility = 'hidden';
+	
+	$('#favorites li a').each(function() {
+		this.setAttribute("href", "#ListsInfo"); 
+		this.setAttribute("onClick", "");
+		//alert(this.innerHtml) 
+		})
+		$('#favorites li #delBtn').each(function() {
+			this.parentNode.removeChild(this);
+		})
+		$('#favorites').listview("refresh");
+}
+
 function playAll(id)
 {
 
@@ -431,6 +514,30 @@ function deleteList(listId)
 	return false;
 }
 
+function addToFavorites(btn)
+{
+	$.mobile.showPageLoadingMsg();
+	listId = document.getElementById('ListsInfo').getAttribute("listId");	
+  					var dir = host + "ayax/addToFavorites.php?userId="+userId+"&listId="+listId;
+  					//alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+     					//alert(msg);
+     					//btn.style.visibility = 'hidden';
+						$.mobile.hidePageLoadingMsg();
+						});
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
+						});
+}
+
 function validar(which) {
   for (i=0;i<which.length - 1;i++) {
     if (!which.elements[i].value && which.elements[i].name){
@@ -441,7 +548,7 @@ function validar(which) {
 
 function getDataFromForm(which) {
 	var data = "";
-  for (i=0;i<which.length - 1;i++) {
+  for (i=0;i<which.length;i++) {
     if (which.elements[i].name == "privacy"){
       if(which.elements[i].checked)
       data += which.elements[i].name + '=' + which.elements[i].value + '&';
