@@ -208,8 +208,6 @@ function editList(btn)
 		$('#songlist').listview("refresh");
 		
 		
-	//var list = $( "#ListsInfo" ).find( "#songlist" );
-	//alert(list.length);
 }
 
 function editReady(btn)
@@ -295,7 +293,31 @@ function deleteSong(songId)
 
 function clearList()
 {
+	if(confirm("Are you sure you want to clear this list?") == 0)
+	return false;
+	$.mobile.showPageLoadingMsg();
+	listId = document.getElementById('ListsInfo').getAttribute("listId");	
+	var dir = host + "ayax/clearList.php?listId="+listId;
+  					//alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+     						var list = $( "#ListsInfo" ).find( "#songlist" );
+							list.empty();
+							$('#songlist').listview("refresh");
+							$.mobile.hidePageLoadingMsg();
+						});
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
+						});
 	
+	return false;
 }
 
 function editOwnLists()
@@ -352,7 +374,7 @@ function addNewList()
 	return false;
 	$.mobile.showPageLoadingMsg();	
   					var dir = host + "ayax/newList.php?userId="+userId+"&"+getDataFromForm(document.newListForm);
-  					alert(dir);
+  					//alert(dir);
 					var request = $.ajax({
       					type: "GET",
       					url: dir,
@@ -360,9 +382,11 @@ function addNewList()
      					});
 
      				request.done(function(msg) {
-     					alert(msg);
-							$.mobile.hidePageLoadingMsg();
-							history.back()
+     					//alert(msg);
+     					changeOwnLists();
+						$.mobile.hidePageLoadingMsg();
+						history.back();
+						document.newListForm.reset();
 						});
 
 					request.fail(function(jqXHR, textStatus) {
@@ -374,7 +398,37 @@ function addNewList()
 
 function deleteList(listId)
 {
-	alert(listId);
+	if(confirm("Are you sure you want to delete this list?") == 0)
+	return false;
+	
+	$.mobile.showPageLoadingMsg();	
+	var dir = host + "ayax/deleteList.php?listId="+listId;
+  					//alert(dir);
+					var request = $.ajax({
+      					type: "GET",
+      					url: dir,
+	  					cache: false,
+     					});
+
+     				request.done(function(msg) {
+     					//alert(msg);
+     					$('#owns li a').each(function() {
+     						if(this.getAttribute('listId') == listId)
+     						{
+     							this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+     							$('#owns').listview("refresh");
+     							$.mobile.hidePageLoadingMsg();
+     							return false;
+     						}
+     					})
+						});
+
+					request.fail(function(jqXHR, textStatus) {
+  							alert( "Request failed: " + textStatus );
+  							$.mobile.hidePageLoadingMsg();
+						});
+	
+	return false;
 }
 
 function validar(which) {
