@@ -15,7 +15,7 @@ $(document).bind("mobileinit", function(){
 			var menuStatus;
 			// Show menu
 			$("a.showMenu").live("click", function (event) {			
-			  document.getElementById("bplayer").style.left = "-2000px";
+			  hidePlayer();
 				if(!menuStatus){	
 				document.getElementById("menu").style.visibility = 'visible';	
 				$(".ui-page-active").animate({
@@ -94,7 +94,7 @@ $(document).bind("mobileinit", function(){
 		//cuando se apreta el reproductor
 		$( '#reproductor' ).live( 'pageshow',function(event, ui)
 			{
-			document.getElementById('bplayer').style.left = '0px';
+			showPlayer();
 			});
 
 
@@ -120,62 +120,32 @@ $(document).bind("mobileinit", function(){
 				options.style.height = '0px';
 				options.style.margin = ".5em 0 0em";
 			});
-			
-			$( '#favoriteLists' ).live( 'pagebeforeshow',function(event, ui)
-			{
-				var options = document.getElementById('editBtn3');
-				options.style.height = '';
-				options.style.margin = ".5em 0 1em";
-				options.style.visibility = 'visible';
-				
-				options = document.getElementById('doneBtn3');
-				options.style.height = '0px';
-				options.style.margin = "0 0 0";
-				options.style.visibility = 'hidden';
-			});
+
 
 
 			$( '#favoriteLists' ).live( 'pageshow',function(event, ui)
 			{	
-				if(this.getAttribute("status")){			
+				if(this.getAttribute("status"))
+						{
+							
 				$.mobile.showPageLoadingMsg();
-				this.removeAttribute("status");
-				}
-				
-				var dir = host + "ayax/favoriteLists.php?userId="+ userId;
-  					//alert(dir);
-					var request = $.ajax({
-      					type: "GET",
-      					url: dir,
-	  					cache: false,
-     					});
-     				request.done(function(msg) {
-  							var list = $( "#favoriteLists" ).find( "#favorites" );
-							list.empty();
-							list.append(msg);
-							$('#favorites').listview("refresh");
-						});
-
-					request.fail(function(jqXHR, textStatus) {
-  							alert( "Request failed: " + textStatus );
-						});
+  				var list = $( "#favoriteLists" ).find( "#favorites" );
+				list.empty();
+				var html = '<li><a href="acura.html">Acura</a><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a></li><li><a href="audi.html">Audi</a></li><li><a href="bmw.html">BMW</a></li>';
+				list.append(html);
+				$('#favorites').listview("refresh");
+				//$.mobile.loadPage("ownLists.html");
 				$.mobile.hidePageLoadingMsg();
+							
+  							this.removeAttribute("status");
+  							//$.mobile.showPageLoadingMsg();
+  						}
+  						$.mobile.hidePageLoadingMsg();
 
 			});
-			
-			$("#favoriteLists li a").live("click", function (event) {
-				
-				var id = this.getAttribute("listId");
-				//alert(id);
-				document.getElementById('ListsInfo').setAttribute("listId", id);
-				var title = $( "#ListsInfo" ).find( "#headerTitle" );
-                title.empty();
-                title.append(this.innerHTML);
-                
 
-				return true;
 
-			});
+
 
 
 			$("#searchMusic #musicForm").submit(function() {
