@@ -68,7 +68,7 @@ var myPlaylist;$(document).ready(function(){
 	function hidePlayer()
 	{
 	
-	document.getElementById('bplayer').style.left = '-2000px';
+	document.getElementById('bplayer').style.visibility="hidden";
 	document.getElementById('jp-controls-holder').style.visibility="hidden";
 	
 
@@ -76,7 +76,7 @@ var myPlaylist;$(document).ready(function(){
 	
 	function showPlayer()
 	{
-	document.getElementById('bplayer').style.left = '0px';
+	document.getElementById('bplayer').style.visibility= 'visible';
 	document.getElementById('jp-controls-holder').style.visibility= 'visible';
 
 	}
