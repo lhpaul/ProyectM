@@ -15,7 +15,7 @@ $(document).bind("mobileinit", function(){
 			var menuStatus;
 			// Show menu
 			$("a.showMenu").live("click", function (event) {			
-			  document.getElementById("bplayer").style.left = "-2000px";
+			  hidePlayer();
 				if(!menuStatus){	
 				document.getElementById("menu").style.visibility = 'visible';	
 				$(".ui-page-active").animate({
@@ -94,7 +94,7 @@ $(document).bind("mobileinit", function(){
 		//cuando se apreta el reproductor
 		$( '#reproductor' ).live( 'pageshow',function(event, ui)
 			{
-			document.getElementById('bplayer').style.left = '0px';
+			showPlayer();
 			});
 
 

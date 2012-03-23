@@ -22,7 +22,8 @@ var myPlaylist;$(document).ready(function(){
 	if(html){	
 	cancion = html;		
 	eval(cancion);
-	document.getElementById("bplayer").style.left = "0px";
+	showPlayer();
+	
 	}
 	
 	else
@@ -45,8 +46,8 @@ var myPlaylist;$(document).ready(function(){
 	if(html){
 	cancion = html;	
 	eval(cancion);
-	myPlaylist.play(-1);
-	document.getElementById("bplayer").style.left = "0px";
+	myPlaylist.play(-1);	
+	showPlayer();
 	}else
 	alert('Sorry, unexpected error. Please try again later.');	
 	}
@@ -62,7 +63,23 @@ var myPlaylist;$(document).ready(function(){
 	list.append(html);
 	$('#song').listview("refresh");
 	$.mobile.hidePageLoadingMsg();
+	}
+	
+	function hidePlayer()
+	{
+	
+	document.getElementById('bplayer').style.visibility="hidden";
+	document.getElementById('jp-controls-holder').style.visibility="hidden";
+	
+
 	}	
+	
+	function showPlayer()
+	{
+	document.getElementById('bplayer').style.visibility= 'visible';
+	document.getElementById('jp-controls-holder').style.visibility= 'visible';
+
+	}
 	
 	
 	
