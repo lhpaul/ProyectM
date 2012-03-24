@@ -178,14 +178,17 @@
 
     <div data-role="content" >  
     <div class="content-primary">
-    	<div data-role="controlgroup" id="editableList" align="center" data-type="horizontal">
-        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); showPlayer();" data-role="button" data-mini="true">Play All</a>
+    	<div data-role="controlgroup" id="editableList" align="center" data-type="horizontal" style="visibility: hidden;" align="center">
+        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button" data-mini="true">Play All</a>
         	<a href="#" data-theme="a" onclick="editList(this);" data-role="button" data-inline="false">Edit</a>
         	<a href="#" data-theme="a" data-role="button" data-inline="false" onclick="clearList()">Clear</a>
         </div>
-        <div data-role="controlgroup" data-theme="a" id="notEditableList" data-type="horizontal">
-        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); showPlayer();" data-role="button">Play All</a>
-        	<a href="#" data-theme="a" data-role="button" data-inline="false">Add To Favorites</a>
+        <div data-role="controlgroup" data-theme="a" id="notEditableList" data-type="horizontal" style="visibility: hidden;" align="center">
+        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button">Play All</a>
+        	<a href="#" data-theme="a" data-role="button" data-inline="false" onclick="addToFavorites(this)">Add To Favorites</a>
+        </div>
+        <div data-role="controlgroup" data-theme="a" id="favoriteList" data-type="horizontal" style="visibility: hidden;" align="center">
+        	<a href="#reproductor" data-theme="a" onclick="var id = $('#valorlista').attr('idlista'); playAll(id); document.getElementById('bplayer').style.left = '0px';" data-role="button">Play All</a>
         </div>
         <a href="#" id="doneBtn" data-theme="a" data-role="button" data-icon="check">Done</a>
     <ul id="songlist" data-role="listview">
@@ -253,7 +256,9 @@
     <div data-role="content" >
     <p>&nbsp;</p>  
     <div class="content-primary">
-    <ul id="favorites" data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+    	<a href="#" id="editBtn3" onclick="editFavoriteLists(this); return false;" data-theme="a" data-role="button">Edit</a>
+    	<a href="#" id="doneBtn3" onclick="editFavoriteListsReady(this); return false;" data-theme="a" data-role="button">Done</a>
+    <ul id="favorites" data-role="listview">
     </ul>
     </div>
     </div><!-- /content -->
@@ -311,7 +316,7 @@
 
 	<div data-role="header" data-id="searchHead" data-position="fixed">
 		<h1>Player</h1>
-		<a href="#" onclick="history.back(); hidePlayer();" class="back"></a>
+		<a href="#" onclick="history.back();  document.getElementById('bplayer').style.left = '-2000px';" class="back"></a>
 	
 	</div><!-- /header -->
 
@@ -420,7 +425,7 @@
 						</div>
 						<div class="jp-current-time"></div>
 						<div class="jp-duration"></div>
-						<div class="jp-controls-holder ui-footer ui-bar-d"  id="jp-controls-holder">
+						<div class="jp-controls-holder">
 							<ul class="jp-controls">
 								<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
 								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
@@ -457,12 +462,6 @@
 						<li></li>
 					</ul>
 				</div>
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />			
-
 				<div class="jp-no-solution">
 					<span>Update Required</span>
 					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.

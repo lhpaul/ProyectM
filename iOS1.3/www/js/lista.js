@@ -1,3 +1,31 @@
+$("#favoriteLists li a").live("click", function (event) {
+				
+				var id = this.getAttribute("listId");
+				//alert(id);
+				document.getElementById('ListsInfo').setAttribute("listId", id);
+				var title = $( "#ListsInfo" ).find( "#headerTitle" );
+                title.empty();
+                title.append(this.innerHTML);
+                
+                var options = document.getElementById('favoriteList');
+				options.style.visibility = 'visible';
+				options.style.height = '';
+				options.style.margin = ".5em 0 1em";
+				
+				options = document.getElementById('notEditableList');
+				options.style.visibility = 'hidden';
+				options.style.height = '0px';
+				options.style.margin = "0 0 0";
+				
+				options = document.getElementById('editableList');
+				options.style.visibility = 'hidden';
+				options.style.height = '0px';
+				options.style.margin = "0 0 0";
+
+				return true;
+
+			});
+
 $("#ownLists li a").live("click", function (event) {
 				
 				var id = this.getAttribute("listId");
@@ -15,7 +43,12 @@ $("#ownLists li a").live("click", function (event) {
 				options = document.getElementById('notEditableList');
 				options.style.visibility = 'hidden';
 				options.style.height = '0px';
-				options.style.margin = ".5em 0 0em";
+				options.style.margin = "0 0 0";
+				
+				options = document.getElementById('favoriteList');
+				options.style.visibility = 'hidden';
+				options.style.height = '0px';
+				options.style.margin = "0 0 0";
 				
 				return true;
 
@@ -37,7 +70,13 @@ $("#friendLists li a").live("click", function (event) {
 				options = document.getElementById('editableList');
 				options.style.visibility = 'hidden';
 				options.style.height = '0px';
-				options.style.margin = ".5em 0 0em";
+				options.style.margin = "0 0 0";
+				
+				options = document.getElementById('favoriteList');
+				options.style.visibility = 'hidden';
+				options.style.height = '0px';
+				options.style.margin = "0 0 0";
+				
 				return true;
 
 			});
